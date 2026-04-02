@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeLearn — Education, Not Get-Rich-Quick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sun:    #FFD93D;
+      --sky:    #6BCB77;
+      --coral:  #FF6B6B;
+      --teal:   #4ECDC4;
+      --ink:    #1A1A2E;
+      --soft:   #F9F7F0;
+      --mid:    #E8E4DA;
+      --white:  #FFFFFF;
+      --radius: 18px;
+      --shadow: 0 4px 24px rgba(26,26,46,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--soft);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 3px solid var(--sun);
+      padding: 0 2rem;
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 900;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span.dot { color: var(--coral); }
+
+    .nav-links {
+      display: flex; gap: 0.25rem; list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 700;
+      padding: 0.4rem 0.75rem;
+      border-radius: 50px;
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { background: var(--sun); color: var(--ink); }
+
+    .nav-live {
+      background: var(--coral);
+      color: var(--white) !important;
+      border-radius: 50px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,107,107,0.4); }
+      50%      { box-shadow: 0 0 0 8px rgba(255,107,107,0); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--sun) 0%, #FFE77A 50%, var(--teal) 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255,107,107,0.15) 0%, transparent 50%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--white);
+      color: var(--coral);
+      font-size: 0.75rem; font-weight: 900;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--ink);
+      position: relative;
+      max-width: 700px; margin: 0 auto 1.25rem;
+    }
+    .hero h1 em {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--coral);
+    }
+    .hero p {
+      font-size: 1.1rem; max-width: 520px; margin: 0 auto 2.5rem;
+      color: rgba(26,26,46,0.75);
+      line-height: 1.7;
+      position: relative;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      position: relative;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      font-weight: 800; font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+    .btn-primary { background: var(--coral); color: var(--white); }
+    .btn-secondary { background: var(--white); color: var(--ink); }
+
+    /* ── START HERE BANNER ── */
+    .start-here {
+      background: var(--sky);
+      color: var(--white);
+      padding: 1rem 2rem;
+      text-align: center;
+      font-weight: 700; font-size: 0.95rem;
+    }
+    .start-here a { text-decoration: underline; color: var(--white); }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .section-label {
+      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .section h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900; margin-bottom: 0.75rem;
+    }
+    .section .intro {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem; color: rgba(26,26,46,0.65);
+      line-height: 1.75; max-width: 680px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── CARD GRID ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--mid);
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .card-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.88rem; color: rgba(26,26,46,0.6); line-height: 1.6; }
+    .card-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem; border-radius: 50px;
+      background: var(--mid); color: var(--ink);
+      margin-top: 1rem;
+    }
+    .card-link {
+      display: block; margin-top: 1rem;
+      font-size: 0.85rem; font-weight: 700; color: var(--coral);
+    }
+
+    /* card accent colours */
+    .card.c-yellow { border-top-color: var(--sun); }
+    .card.c-green  { border-top-color: var(--sky); }
+    .card.c-coral  { border-top-color: var(--coral); }
+    .card.c-teal   { border-top-color: var(--teal); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 4px;
+      background: linear-gradient(90deg, var(--sun), var(--teal), var(--coral), var(--sky));
+      border: none;
+    }
+
+    /* ── LIVE SESSIONS ── */
+    .live-section {
+      background: var(--ink);
+      color: var(--white);
+      padding: 4rem 1.5rem;
+    }
+    .live-inner { max-width: 960px; margin: 0 auto; }
+    .live-section .section-label { color: var(--sun); }
+    .live-section h2 { color: var(--white); }
+    .live-section .intro { color: rgba(255,255,255,0.6); }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .session-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: background 0.18s;
+    }
+    .session-card:hover { background: rgba(255,255,255,0.12); }
+    .session-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--sun); }
+    .session-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    .placeholder-box {
+      border: 2px dashed rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .placeholder-box p {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.9rem; font-style: italic;
+    }
+
+    /* ── PLACEHOLDER (generic) ── */
+    .placeholder {
+      border: 2px dashed var(--mid);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      color: rgba(26,26,46,0.35);
+      font-size: 0.9rem; font-style: italic;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* ── FAQ ── */
+    .faq-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .faq-item h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .faq-item p  { font-size: 0.88rem; color: rgba(26,26,46,0.6); line-height: 1.6; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #FFF3CD;
+      border-left: 5px solid var(--sun);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      font-size: 0.85rem; line-height: 1.7;
+      color: rgba(26,26,46,0.75);
+    }
+    .disclaimer strong { display: block; margin-bottom: 0.3rem; color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--sun); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <div class="nav-logo">📈 TradeLearn<span class="dot">.</span></div>
+  <ul class="nav-links">
+    <li><a href="#intro">Day Trading</a></li>
+    <li><a href="#forex">Forex</a></li>
+    <li><a href="#mt5">MT5</a></li>
+    <li><a href="#propfirms">Prop Firms</a></li>
+    <li><a href="#eabuilder">EABuilder</a></li>
+    <li><a href="#live" class="nav-live">🔴 Live Sessions</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- ══ START HERE BANNER ══ -->
+<div class="start-here">
+  👋 New here? <a href="#intro">Start with the Introduction to Day Trading</a> — it'll set expectations and give you the foundations you need.
+</div>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-badge">Private · Educational · For Friends &amp; Family</div>
+  <h1>Learn to trade with <em>clarity,</em> not hype.</h1>
+  <p>A personal resource for people close to me. You'll find structured lessons, honest commentary, and live trading sessions — no promises, just education.</p>
+  <div class="hero-cta">
+    <a href="#intro" class="btn btn-primary">Start Learning</a>
+    <a href="#live" class="btn btn-secondary">Watch Live Sessions</a>
+  </div>
+</header>
+
+<hr class="divider" />
+
+<!-- ══ 1. INTRO TO DAY TRADING ══ -->
+<section class="section" id="intro">
+  <p class="section-label">Section 1</p>
+  <h2>Introduction to Day Trading</h2>
+  <p class="intro">Everything you need to understand what day trading actually is — before touching a chart. The mindset, the learning curve, and why this is nothing like what you see on social media.</p>
+
+  <div class="card-grid">
+    <div class="card c-yellow">
+      <span class="card-icon">📅</span>
+      <h3>What is Day Trading?</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — buying and selling within the same session, key differences from long-term investing. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">🧠</span>
+      <h3>The Psychology of Trading</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — discipline, managing losing trades, emotional control. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">📈</span>
+      <h3>The Realistic Learning Curve</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — honest expectations, timeframes, what "consistent" really means. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">🎥</span>
+      <h3>A Day in My Trading Life</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — a real walkthrough of a typical trading session from start to finish. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 2. INTRO TO FOREX ══ -->
+<section class="section" id="forex">
+  <p class="section-label">Section 2</p>
+  <h2>Introduction to Forex</h2>
+  <p class="intro">The foreign exchange market is the largest in the world. Here's what that means for you as a UK-based trader — and why it suits day trading particularly well.</p>
+
+  <div class="card-grid">
+    <div class="card c-teal">
+      <span class="card-icon">🌍</span>
+      <h3>What is the Forex Market?</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — currencies, pairs, why it's the biggest market on earth. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">🕐</span>
+      <h3>Market Sessions &amp; Hours</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — London, New York, Tokyo sessions and what this means for a UK trader. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">📖</span>
+      <h3>Key Concepts: Pips, Lots &amp; Leverage</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — pips, spread, leverage, lots, going long vs short, explained simply. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">💱</span>
+      <h3>Major, Minor &amp; Exotic Pairs</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — which pairs to start with and why beginners should keep it simple. ]</p>
+      <span class="card-tag">Beginner</span>
+    </div>
+  </div>
+
+  <div class="placeholder" style="margin-top:1.5rem;">
+    📚 A full <strong>Forex Glossary</strong> will live here — bookmark it for reference whenever you hit an unfamiliar term.
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 3. METATRADER 5 ══ -->
+<section class="section" id="mt5">
+  <p class="section-label">Section 3</p>
+  <h2>MetaTrader 5 (MT5)</h2>
+  <p class="intro">MT5 is the platform I trade on every day. This section is essentially a mini tutorial series — short screen recordings for each topic so you can follow along at your own pace.</p>
+
+  <div class="card-grid">
+    <div class="card c-green">
+      <span class="card-icon">⬇️</span>
+      <h3>Download &amp; Setup</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — where to get MT5 and first-time setup. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-green">
+      <span class="card-icon">🗺️</span>
+      <h3>Tour of the Interface</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — charts, market watch, navigator panel walkthrough. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-green">
+      <span class="card-icon">🖱️</span>
+      <h3>Placing Your First Trade</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — market orders, stop loss, take profit explained. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-green">
+      <span class="card-icon">🕯️</span>
+      <h3>Reading &amp; Customising Charts</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — timeframes, candle types, colours and layout. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-green">
+      <span class="card-icon">📊</span>
+      <h3>Using Built-in Indicators</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — moving averages, RSI, MACD and more. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-green">
+      <span class="card-icon">⚙️</span>
+      <h3>Setting Up My Workspace</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — replicate my exact layout so live sessions are easy to follow. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 4. PROP FIRMS ══ -->
+<section class="section" id="propfirms">
+  <p class="section-label">Section 4</p>
+  <h2>Prop Firms — Trade Big Without Big Capital</h2>
+  <p class="intro">One of the most eye-opening things about modern trading: you don't need £50,000 to trade £50,000. Prop firms fund traders who can prove they have a consistent strategy.</p>
+
+  <div class="card-grid">
+    <div class="card c-coral">
+      <span class="card-icon">🏦</span>
+      <h3>What is a Prop Firm?</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — how the funding model works and why it exists. ]</p>
+      <span class="card-tag">Key Concept</span>
+    </div>
+    <div class="card c-coral">
+      <span class="card-icon">🎯</span>
+      <h3>The Challenge / Evaluation</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — what passing a challenge actually involves, step by step. ]</p>
+      <span class="card-tag">Key Concept</span>
+    </div>
+    <div class="card c-coral">
+      <span class="card-icon">💰</span>
+      <h3>Profit Splits &amp; Getting Paid</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — how profit sharing works in practice. ]</p>
+      <span class="card-tag">Key Concept</span>
+    </div>
+    <div class="card c-coral">
+      <span class="card-icon">⚠️</span>
+      <h3>Rules, Risks &amp; Drawdown Limits</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — the rules you must follow and what happens if you break them. ]</p>
+      <span class="card-tag">Important</span>
+    </div>
+    <div class="card c-coral">
+      <span class="card-icon">🏆</span>
+      <h3>Firms I've Used &amp; Recommend</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — personal experience with FTMO, MyFundedFX, The Funded Trader and others. ]</p>
+      <span class="card-tag">Personal Picks</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 5. EABUILDER ══ -->
+<section class="section" id="eabuilder">
+  <p class="section-label">Section 5 — Advanced</p>
+  <h2>EABuilder — Custom Indicators &amp; Expert Advisors</h2>
+  <p class="intro">If you want to automate your strategy, this is where it starts. EABuilder lets you build automated trading tools without writing code from scratch. This section is clearly labelled as more advanced content.</p>
+
+  <div class="card-grid">
+    <div class="card c-teal">
+      <span class="card-icon">🤖</span>
+      <h3>What is an Expert Advisor?</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — what EAs are, why automation matters, and what it can and can't do. ]</p>
+      <span class="card-tag">Advanced</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">🔧</span>
+      <h3>Introduction to EABuilder</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — what EABuilder is, how to get started, why it's accessible. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">📐</span>
+      <h3>Building a Custom Indicator</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — step-by-step walkthrough of creating a simple indicator. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">⚡</span>
+      <h3>Building a Basic EA</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — entry/exit rules, risk management parameters, going live. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">🔬</span>
+      <h3>Backtesting in MT5</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — how to test your EA on historical data and read the results. ]</p>
+      <span class="card-tag">Screen Recording</span>
+    </div>
+    <div class="card c-teal">
+      <span class="card-icon">🚨</span>
+      <h3>Important Caveats</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — past performance, over-optimisation risks, and why no EA is a money printer. ]</p>
+      <span class="card-tag">Must Read</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 6. LIVE SESSIONS ══ -->
+<div class="live-section" id="live">
+  <div class="live-inner">
+    <p class="section-label">Section 6 — The Main Event</p>
+    <h2 style="color:var(--white);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:0.75rem;">🔴 Live Trading Sessions</h2>
+    <p class="intro">Watch me trade in real time, with commentary on every decision. This is the core of what this site is about.</p>
+
+    <div class="session-grid">
+      <div class="session-card">
+        <h3>Pre-Session Plan</h3>
+        <p>Before each session I'll share the pairs I'm watching, key price levels, and any news events that could move the market.</p>
+      </div>
+      <div class="session-card">
+        <h3>Live Commentary</h3>
+        <p>I talk through every entry, every hesitation, and every exit — including the ones that don't go to plan.</p>
+      </div>
+      <div class="session-card">
+        <h3>Post-Session Review</h3>
+        <p>After trading I review what happened, what worked, and what I'd do differently. Often the most educational part.</p>
+      </div>
+      <div class="session-card">
+        <h3>Session Archive</h3>
+        <p>All past sessions are saved here chronologically. New members can go back to the beginning and learn from the full journey.</p>
+      </div>
+    </div>
+
+    <div class="placeholder-box">
+      <p>📹 Live sessions and recordings will appear here. Check back soon — or join the group chat to get notified when the next one is scheduled.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 7. RESOURCES ══ -->
+<section class="section" id="resources">
+  <p class="section-label">Section 7</p>
+  <h2>Resources &amp; Tools</h2>
+  <p class="intro">Everything linked to on this site in one place. Bookmark this page for quick reference.</p>
+
+  <div class="card-grid">
+    <div class="card c-yellow">
+      <span class="card-icon">🖥️</span>
+      <h3>MT5 Download</h3>
+      <p>[ Link to MetaTrader 5 download — coming soon ]</p>
+      <a class="card-link" href="#">→ Visit site</a>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">🛠️</span>
+      <h3>EABuilder</h3>
+      <p>[ Link to EABuilder — coming soon ]</p>
+      <a class="card-link" href="#">→ Visit site</a>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">📰</span>
+      <h3>Forex Factory Calendar</h3>
+      <p>Economic news calendar — essential for knowing when big market-moving events are due.</p>
+      <a class="card-link" href="https://www.forexfactory.com/calendar" target="_blank">→ Visit site</a>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">📡</span>
+      <h3>DailyFX</h3>
+      <p>News, analysis and trade ideas from a trusted Forex source.</p>
+      <a class="card-link" href="https://www.dailyfx.com" target="_blank">→ Visit site</a>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">📚</span>
+      <h3>Recommended Reading</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Books and YouTube channels I personally recommend — coming soon ]</p>
+    </div>
+    <div class="card c-yellow">
+      <span class="card-icon">📖</span>
+      <h3>Glossary of Terms</h3>
+      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Full A–Z glossary of trading and Forex terms — coming soon ]</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ 8. FAQ / DISCLAIMER ══ -->
+<section class="section" id="faq">
+  <p class="section-label">Section 8</p>
+  <h2>FAQ &amp; Disclaimer</h2>
+  <p class="intro">A few common questions, and some important things to read before watching any sessions.</p>
+
+  <ul class="faq-list">
+    <li class="faq-item">
+      <h4>Do I need any money to get started learning?</h4>
+      <p>[ Answer coming soon — covering demo accounts and how you can practice without any real capital. ]</p>
+    </li>
+    <li class="faq-item">
+      <h4>Is this something I could do as a full-time job?</h4>
+      <p>[ Answer coming soon — an honest take on what's realistic and what the journey looks like. ]</p>
+    </li>
+    <li class="faq-item">
+      <h4>How do I get notified about live sessions?</h4>
+      <p>[ Answer coming soon — details about the group chat / notification method. ]</p>
+    </li>
+    <li class="faq-item">
+      <h4>Can I ask questions during live sessions?</h4>
+      <p>[ Answer coming soon — how the sessions work and how to interact. ]</p>
+    </li>
+  </ul>
+
+  <div class="disclaimer" style="margin-top:2rem;">
+    <strong>⚠️ Important Disclaimer — Please Read</strong>
+    This website is for <strong>educational purposes only</strong>. Nothing published here — including live sessions, commentary, or written content — constitutes financial advice. Trading financial instruments including Forex carries a significant risk of loss and is not suitable for everyone. My results are personal and are not typical or guaranteed. Always do your own research and consider seeking independent financial advice before risking any capital. Past performance is never indicative of future results.
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>TradeLearn · Private site for friends &amp; family · Educational purposes only</p>
+  <p style="margin-top:0.5rem;">Built with care — <a href="#faq">disclaimer</a> · <a href="#resources">resources</a> · <a href="#live">live sessions</a></p>
+</footer>
+
+</body>
+</html>
