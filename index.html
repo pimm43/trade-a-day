@@ -171,16 +171,60 @@
     .card {
       background: var(--white);
       border-radius: var(--radius);
-      padding: 1.75rem;
       box-shadow: var(--shadow);
       border-top: 4px solid var(--mid);
       transition: transform 0.18s, box-shadow 0.18s;
       position: relative;
+      overflow: hidden;
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-    .card-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-    .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .card p { font-size: 0.88rem; color: rgba(26,26,46,0.6); line-height: 1.6; }
+
+    /* ── CARD HEADER (always visible, clickable) ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.75rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 0.75rem;
+    }
+    .card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .card-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .card h3 { font-size: 1rem; font-weight: 800; margin: 0; }
+    .card-hint {
+      font-size: 0.75rem;
+      color: rgba(26,26,46,0.35);
+      font-style: italic;
+      margin-top: 0.2rem;
+      font-weight: 400;
+    }
+    .card-chevron {
+      font-size: 0.75rem;
+      color: rgba(26,26,46,0.3);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .card.open .card-chevron { transform: rotate(180deg); }
+
+    /* ── CARD BODY (hidden until open) ── */
+    .card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 1.75rem;
+    }
+    .card.open .card-body {
+      max-height: 900px;
+      padding: 0 1.75rem 1.5rem;
+    }
+    .card-body p { font-size: 0.88rem; color: rgba(26,26,46,0.65); line-height: 1.7; }
+    .card-body p + p { margin-top: 0.65rem; }
+
     .card-tag {
       display: inline-block; font-size: 0.68rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 0.1em;
@@ -337,36 +381,77 @@
 
   <div class="card-grid">
     <div class="card c-yellow">
-      <span class="card-icon">📅</span>
-      <h3>What is Day Trading?</h3>
-      <p>1. What is Day Trading?
-
-Day trading is the practice of buying and selling financial instruments — currencies, stocks, indices, or commodities — within the same trading session. Unlike a traditional investor who might hold shares in a company for months or years and profit only if the price rises, a day trader opens and closes their positions within hours, sometimes minutes. By the end of each day, they are typically out of the market entirely.
-
-One of the most important things to understand early on is that trading is not just about buying low and selling high. In the markets, you can also sell first and buy back later — a practice known as going short. This means you can potentially profit whether the market is rising or falling. If you believe a currency pair is about to drop in value, you can sell it, and if you're right, you profit from that decline. This is a fundamental difference from simply owning shares and hoping they go up.
-
-For day traders, the Forex (foreign exchange) market is a particularly popular choice. It operates 24 hours a day across global sessions, offers significant liquidity, and requires relatively little capital to get started — especially when combined with a prop firm (more on that in Section 4).
-
-It's worth being honest about something from the outset: day trading is not a shortcut to wealth, and it is not gambling — though it can resemble the latter if approached without discipline and a proper strategy. The traders who succeed long-term treat it as a skill, developed carefully over time, with risk management at its core. That's exactly what this site is designed to help you understand.</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📅</span>
+          <div>
+            <h3>What is Day Trading?</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Day trading is the practice of buying and selling financial instruments — currencies, stocks, indices, or commodities — within the same trading session. Unlike a traditional investor who might hold shares for months or years and profit only if the price rises, a day trader opens and closes their positions within hours, sometimes minutes.</p>
+        <p>One of the most important things to understand early on is that trading is not just about buying low and selling high. In the markets, you can also <strong>sell first and buy back later</strong> — known as <em>going short</em>. This means you can potentially profit whether the market is rising <em>or</em> falling. If you believe a currency pair is about to drop in value, you sell it, and if you're right, you profit from that decline. This is a fundamental difference from simply owning shares and hoping they go up.</p>
+        <p>It's worth being honest from the outset: day trading is not a shortcut to wealth, and it is not gambling — though it can resemble the latter if approached without discipline. The traders who succeed treat it as a skill, developed carefully over time, with risk management at its core.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">🧠</span>
-      <h3>The Psychology of Trading</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — discipline, managing losing trades, emotional control. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🧠</span>
+          <div>
+            <h3>The Psychology of Trading</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>If there is one thing that separates consistently profitable traders from everyone else, it is rarely the strategy — it is the mindset. Fear and greed are the two great enemies of a trader. Fear causes you to exit a winning trade too early, or to hesitate on a valid entry because your last trade was a loss. Greed causes you to hold on too long, or to risk more than you should.</p>
+        <p><strong>Losses are part of the job.</strong> Even the best traders have losing trades — sometimes losing days and weeks. What matters is that your winners, over time, outweigh your losers. A trader with a 50% win rate can still be very profitable if winning trades consistently make more than losing ones give back.</p>
+        <p><strong>Never risk more than you can afford to lose emotionally.</strong> There is a specific amount of money at which each person stops thinking clearly. Risking more than that on a single trade is a fast road to poor decisions. Start small, stay consistent.</p>
+        <p><strong>Discipline over excitement.</strong> The most dangerous days are often the most exciting ones — fast-moving markets, high volatility, the urge to jump in. The best traders wait patiently for their setup and walk away from anything that doesn't meet their criteria.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">📈</span>
-      <h3>The Realistic Learning Curve</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — honest expectations, timeframes, what "consistent" really means. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📈</span>
+          <div>
+            <h3>The Realistic Learning Curve</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Learning to trade consistently and profitably takes time. For most people, that means <strong>one to three years</strong> of serious, structured practice before anything resembling consistent results emerges. There is no shortcut, and anyone telling you otherwise is either selling something or deeply lucky.</p>
+        <p><strong>Stage 1 — The Excitement Phase.</strong> Everything feels possible. You open a demo account, make some trades that go well, and start wondering why everyone doesn't do this. Early success in demo can create dangerous false confidence.</p>
+        <p><strong>Stage 2 — The Humbling.</strong> Real money is involved and emotions kick in. Losses feel larger than they are. This is where most people quit — and also where the real learning begins.</p>
+        <p><strong>Stage 3 — The Grind.</strong> You develop a strategy, test it, break it and rebuild it. Progress is slow and rarely linear. This stage can last a long time.</p>
+        <p><strong>Stage 4 — Consistency.</strong> With enough screen time and honest self-reflection, patterns emerge. Losses stop feeling like failures and start feeling like data. The traders who make it are not the most talented — they are the most patient.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">🎥</span>
-      <h3>A Day in My Trading Life</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — a real walkthrough of a typical trading session from start to finish. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🎥</span>
+          <div>
+            <h3>A Day in My Trading Life</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — a real walkthrough of a typical trading session from start to finish.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
   </div>
 </section>
@@ -381,34 +466,89 @@ It's worth being honest about something from the outset: day trading is not a sh
 
   <div class="card-grid">
     <div class="card c-teal">
-      <span class="card-icon">🌍</span>
-      <h3>What is the Forex Market?</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — currencies, pairs, why it's the biggest market on earth. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🌍</span>
+          <div>
+            <h3>What is the Forex Market?</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Forex — short for foreign exchange — is the global market where currencies are bought and sold. Every time a business imports goods from another country, or a traveller exchanges money at an airport, they are participating in the Forex market in some form.</p>
+        <p>Currencies are always traded in <strong>pairs</strong> — for example, GBP/USD (British Pound vs US Dollar) or EUR/JPY (Euro vs Japanese Yen). When you trade a pair, you are simultaneously buying one currency and selling the other. If you think the Pound will strengthen against the Dollar, you buy GBP/USD. If it rises, you profit. If it falls, you make a loss.</p>
+        <p>The Forex market is the <strong>largest financial market in the world</strong>, with over $7 trillion traded every single day. That scale means it is extremely liquid — you can almost always get in and out of a trade quickly, which is exactly what day traders need.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">🕐</span>
-      <h3>Market Sessions &amp; Hours</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — London, New York, Tokyo sessions and what this means for a UK trader. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🕐</span>
+          <div>
+            <h3>Market Sessions &amp; Hours</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Unlike stock markets that open and close at fixed times, the Forex market runs 24 hours a day, five days a week. It follows the sun around the world across three main sessions:</p>
+        <p><strong>Tokyo Session (midnight–9am UK time)</strong> — Generally quieter, with most activity in Japanese Yen pairs. Useful for those who trade early mornings.</p>
+        <p><strong>London Session (8am–4pm UK time)</strong> — The most active session for UK-based traders and one of the most important globally. London handles a huge proportion of daily Forex volume, meaning tighter spreads and more opportunity.</p>
+        <p><strong>New York Session (1pm–10pm UK time)</strong> — Overlaps with London from 1pm–4pm, creating the most volatile and high-volume window of the trading day. Major price moves often happen here.</p>
+        <p>As a UK-based trader, the <strong>London open and the London/New York overlap</strong> are typically the best windows to focus on.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">📖</span>
-      <h3>Key Concepts: Pips, Lots &amp; Leverage</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — pips, spread, leverage, lots, going long vs short, explained simply. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📖</span>
+          <div>
+            <h3>Key Concepts: Pips, Lots &amp; Leverage</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>These are the core terms you'll encounter constantly. Understanding them is essential before placing any trade.</p>
+        <p><strong>Pip</strong> — The smallest standard unit of price movement in Forex. For most pairs, one pip is a move of 0.0001. If GBP/USD moves from 1.2500 to 1.2501, that's one pip.</p>
+        <p><strong>Spread</strong> — The difference between the buy price and the sell price. This is effectively the broker's fee. Tighter spreads are better for traders.</p>
+        <p><strong>Lot</strong> — The size of your trade. A standard lot is 100,000 units of currency. Beginners typically use micro lots (1,000 units) to keep risk very small while learning.</p>
+        <p><strong>Leverage</strong> — Borrowed capital that lets you control a larger position than your deposit. Leverage of 1:30 means £1,000 controls £30,000. It amplifies both profits and losses, so it must be used carefully.</p>
+        <p><strong>Long vs Short</strong> — Going <em>long</em> means buying, expecting the price to rise. Going <em>short</em> means selling first, expecting the price to fall — and buying back later at a lower price to profit.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">💱</span>
-      <h3>Major, Minor &amp; Exotic Pairs</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — which pairs to start with and why beginners should keep it simple. ]</p>
-      <span class="card-tag">Beginner</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">💱</span>
+          <div>
+            <h3>Major, Minor &amp; Exotic Pairs</h3>
+            <div class="card-hint">Click to read</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Not all currency pairs are created equal. They are grouped into three categories based on how widely traded they are.</p>
+        <p><strong>Major pairs</strong> always include the US Dollar and are the most liquid and most traded in the world. Examples: GBP/USD, EUR/USD, USD/JPY, USD/CHF. These have the tightest spreads and the most reliable price movement — ideal for beginners.</p>
+        <p><strong>Minor pairs</strong> (also called cross pairs) don't include the Dollar but feature other major currencies. Examples: EUR/GBP, GBP/JPY, EUR/AUD. These can be good for experienced traders but can be more unpredictable.</p>
+        <p><strong>Exotic pairs</strong> combine a major currency with one from an emerging economy — for example USD/TRY (Turkish Lira) or USD/ZAR (South African Rand). These have wide spreads, lower liquidity, and higher risk. Best avoided until you have considerable experience.</p>
+        <p>As a beginner, <strong>stick to major pairs</strong> — particularly GBP/USD and EUR/USD. They are well-documented, highly liquid, and behave more predictably than anything else.</p>
+        <span class="card-tag">Beginner</span>
+      </div>
     </div>
   </div>
 
-  <div class="placeholder" style="margin-top:1.5rem;">
-    📚 A full <strong>Forex Glossary</strong> will live here — bookmark it for reference whenever you hit an unfamiliar term.
-  </div>
+    <div class="placeholder" style="margin-top:1.5rem;">
+      📚 A full <strong>Forex Glossary</strong> will live here — bookmark it for reference whenever you hit an unfamiliar term. Coming soon.
+    </div>
 </section>
 
 <hr class="divider" />
@@ -421,40 +561,82 @@ It's worth being honest about something from the outset: day trading is not a sh
 
   <div class="card-grid">
     <div class="card c-green">
-      <span class="card-icon">⬇️</span>
-      <h3>Download &amp; Setup</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — where to get MT5 and first-time setup. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">⬇️</span>
+          <div><h3>Download &amp; Setup</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — where to get MT5 and first-time setup.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-green">
-      <span class="card-icon">🗺️</span>
-      <h3>Tour of the Interface</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — charts, market watch, navigator panel walkthrough. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🗺️</span>
+          <div><h3>Tour of the Interface</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — charts, market watch, navigator panel walkthrough.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-green">
-      <span class="card-icon">🖱️</span>
-      <h3>Placing Your First Trade</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — market orders, stop loss, take profit explained. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🖱️</span>
+          <div><h3>Placing Your First Trade</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — market orders, stop loss, take profit explained.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-green">
-      <span class="card-icon">🕯️</span>
-      <h3>Reading &amp; Customising Charts</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — timeframes, candle types, colours and layout. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🕯️</span>
+          <div><h3>Reading &amp; Customising Charts</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — timeframes, candle types, colours and layout.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-green">
-      <span class="card-icon">📊</span>
-      <h3>Using Built-in Indicators</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — moving averages, RSI, MACD and more. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📊</span>
+          <div><h3>Using Built-in Indicators</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — moving averages, RSI, MACD and more.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-green">
-      <span class="card-icon">⚙️</span>
-      <h3>Setting Up My Workspace</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — replicate my exact layout so live sessions are easy to follow. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">⚙️</span>
+          <div><h3>Setting Up My Workspace</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — replicate my exact layout so live sessions are easy to follow.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
   </div>
 </section>
@@ -469,34 +651,77 @@ It's worth being honest about something from the outset: day trading is not a sh
 
   <div class="card-grid">
     <div class="card c-coral">
-      <span class="card-icon">🏦</span>
-      <h3>What is a Prop Firm?</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — how the funding model works and why it exists. ]</p>
-      <span class="card-tag">Key Concept</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🏦</span>
+          <div><h3>What is a Prop Firm?</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>A proprietary trading firm — or "prop firm" — is a company that provides capital to traders, allowing them to trade with significantly more money than they could afford on their own. Rather than risking their money on unknown traders, most prop firms use a structured evaluation process to identify people who can trade consistently and responsibly before funding them.</p>
+        <p>The model works like this: you pay a relatively small one-off fee to take a trading challenge. If you pass, the firm allocates you a funded account — typically ranging from £10,000 to £200,000 or more. You then trade that account and keep a substantial share of any profits you make, often between 70% and 90%. The firm keeps the rest.</p>
+        <p>For traders who have developed a solid strategy but don't have large personal capital, this is genuinely game-changing. The barrier to trading at a meaningful level is no longer "do you have £50,000 sitting spare?" — it becomes "can you prove you know what you're doing?"</p>
+        <span class="card-tag">Key Concept</span>
+      </div>
     </div>
     <div class="card c-coral">
-      <span class="card-icon">🎯</span>
-      <h3>The Challenge / Evaluation</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — what passing a challenge actually involves, step by step. ]</p>
-      <span class="card-tag">Key Concept</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🎯</span>
+          <div><h3>The Challenge / Evaluation</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Before a prop firm will fund you, you must pass an evaluation — usually called a challenge. This is designed to prove that you can trade profitably while staying within strict risk rules. Think of it as a job interview, except the interview is a live trading test lasting several weeks.</p>
+        <p>A typical two-phase challenge works like this. In <strong>Phase 1</strong>, you are given a demo account and must hit a profit target — often around 8–10% — within a set number of days, without breaching any risk rules. If you pass, you move to <strong>Phase 2</strong>, which usually has a lower profit target (around 5%) and confirms that Phase 1 wasn't a fluke. Pass both, and you receive your funded account.</p>
+        <p>The key rules throughout are: a maximum <strong>daily loss limit</strong> (typically 4–5% of the account), a maximum <strong>total drawdown limit</strong> (typically 8–10%), and in some firms a <strong>consistency rule</strong> which prevents you from making the bulk of your profit in a single lucky trade. These rules are not there to catch you out — they reflect exactly the discipline a good trader should have anyway.</p>
+        <p>Challenge fees vary by firm and account size, but typically range from around £50 for a small account to a few hundred pounds for a larger one. Most firms offer a reset or second attempt, sometimes at a discount, if you fail.</p>
+        <span class="card-tag">Key Concept</span>
+      </div>
     </div>
     <div class="card c-coral">
-      <span class="card-icon">💰</span>
-      <h3>Profit Splits &amp; Getting Paid</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — how profit sharing works in practice. ]</p>
-      <span class="card-tag">Key Concept</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">💰</span>
+          <div><h3>Profit Splits &amp; Getting Paid</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Once you have a funded account, every profitable month results in a payout — your share of the profits you generated on the firm's capital. The split varies by firm but is typically very favourable to the trader: most reputable firms offer between 70% and 90% of profits, with some increasing that share as you build a track record with them.</p>
+        <p>Payouts are usually processed monthly, though some firms offer more frequent withdrawals once you are established. Payment is typically made via bank transfer or through platforms like Wise or PayPal, depending on the firm.</p>
+        <p>It is worth understanding what you are and are not entitled to. You are entitled to your agreed profit share on any gains above your starting balance. You are not entitled to the firm's capital itself — you are trading it on their behalf. If you breach the risk rules and the account is closed, you lose access to the funded account but you do not owe the firm any money. Your downside is always limited to the original challenge fee you paid.</p>
+        <p>Some firms also offer <strong>scaling plans</strong> — if you hit consistent profit targets over several months, they will increase your account size, giving you access to even more capital as your track record grows.</p>
+        <span class="card-tag">Key Concept</span>
+      </div>
     </div>
     <div class="card c-coral">
-      <span class="card-icon">⚠️</span>
-      <h3>Rules, Risks &amp; Drawdown Limits</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — the rules you must follow and what happens if you break them. ]</p>
-      <span class="card-tag">Important</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">⚠️</span>
+          <div><h3>Rules, Risks &amp; Drawdown Limits</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — the rules you must follow and what happens if you break them.</p>
+        <span class="card-tag">Important</span>
+      </div>
     </div>
     <div class="card c-coral">
-      <span class="card-icon">🏆</span>
-      <h3>Firms I've Used &amp; Recommend</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — personal experience with FTMO, MyFundedFX, The Funded Trader and others. ]</p>
-      <span class="card-tag">Personal Picks</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🏆</span>
+          <div><h3>Firms I've Used &amp; Recommend</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — personal experience with FTMO, MyFundedFX, The Funded Trader and others.</p>
+        <span class="card-tag">Personal Picks</span>
+      </div>
     </div>
   </div>
 </section>
@@ -511,40 +736,82 @@ It's worth being honest about something from the outset: day trading is not a sh
 
   <div class="card-grid">
     <div class="card c-teal">
-      <span class="card-icon">🤖</span>
-      <h3>What is an Expert Advisor?</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — what EAs are, why automation matters, and what it can and can't do. ]</p>
-      <span class="card-tag">Advanced</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🤖</span>
+          <div><h3>What is an Expert Advisor?</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — what EAs are, why automation matters, and what it can and can't do.</p>
+        <span class="card-tag">Advanced</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">🔧</span>
-      <h3>Introduction to EABuilder</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — what EABuilder is, how to get started, why it's accessible. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🔧</span>
+          <div><h3>Introduction to EABuilder</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — what EABuilder is, how to get started, why it's accessible.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">📐</span>
-      <h3>Building a Custom Indicator</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — step-by-step walkthrough of creating a simple indicator. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📐</span>
+          <div><h3>Building a Custom Indicator</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — step-by-step walkthrough of creating a simple indicator.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">⚡</span>
-      <h3>Building a Basic EA</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — entry/exit rules, risk management parameters, going live. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">⚡</span>
+          <div><h3>Building a Basic EA</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — entry/exit rules, risk management parameters, going live.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">🔬</span>
-      <h3>Backtesting in MT5</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Screen recording coming soon — how to test your EA on historical data and read the results. ]</p>
-      <span class="card-tag">Screen Recording</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🔬</span>
+          <div><h3>Backtesting in MT5</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — how to test your EA on historical data and read the results.</p>
+        <span class="card-tag">Screen Recording</span>
+      </div>
     </div>
     <div class="card c-teal">
-      <span class="card-icon">🚨</span>
-      <h3>Important Caveats</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Content coming soon — past performance, over-optimisation risks, and why no EA is a money printer. ]</p>
-      <span class="card-tag">Must Read</span>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🚨</span>
+          <div><h3>Important Caveats</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — past performance, over-optimisation risks, and why no EA is a money printer.</p>
+        <span class="card-tag">Must Read</span>
+      </div>
     </div>
   </div>
 </section>
@@ -591,38 +858,80 @@ It's worth being honest about something from the outset: day trading is not a sh
 
   <div class="card-grid">
     <div class="card c-yellow">
-      <span class="card-icon">🖥️</span>
-      <h3>MT5 Download</h3>
-      <p>[ Link to MetaTrader 5 download — coming soon ]</p>
-      <a class="card-link" href="#">→ Visit site</a>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🖥️</span>
+          <div><h3>MT5 Download</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Link to MetaTrader 5 download — coming soon.</p>
+        <a class="card-link" href="#">→ Visit site</a>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">🛠️</span>
-      <h3>EABuilder</h3>
-      <p>[ Link to EABuilder — coming soon ]</p>
-      <a class="card-link" href="#">→ Visit site</a>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🛠️</span>
+          <div><h3>EABuilder</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Link to EABuilder — coming soon.</p>
+        <a class="card-link" href="#">→ Visit site</a>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">📰</span>
-      <h3>Forex Factory Calendar</h3>
-      <p>Economic news calendar — essential for knowing when big market-moving events are due.</p>
-      <a class="card-link" href="https://www.forexfactory.com/calendar" target="_blank">→ Visit site</a>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📰</span>
+          <div><h3>Forex Factory Calendar</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Economic news calendar — essential for knowing when big market-moving events are due.</p>
+        <a class="card-link" href="https://www.forexfactory.com/calendar" target="_blank">→ Visit site</a>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">📡</span>
-      <h3>DailyFX</h3>
-      <p>News, analysis and trade ideas from a trusted Forex source.</p>
-      <a class="card-link" href="https://www.dailyfx.com" target="_blank">→ Visit site</a>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📡</span>
+          <div><h3>DailyFX</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>News, analysis and trade ideas from a trusted Forex source.</p>
+        <a class="card-link" href="https://www.dailyfx.com" target="_blank">→ Visit site</a>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">📚</span>
-      <h3>Recommended Reading</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Books and YouTube channels I personally recommend — coming soon ]</p>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📚</span>
+          <div><h3>Recommended Reading</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Books and YouTube channels I personally recommend — coming soon.</p>
+      </div>
     </div>
     <div class="card c-yellow">
-      <span class="card-icon">📖</span>
-      <h3>Glossary of Terms</h3>
-      <p class="placeholder" style="border:none;padding:0.5rem 0;text-align:left;font-size:0.85rem;">[ Full A–Z glossary of trading and Forex terms — coming soon ]</p>
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📖</span>
+          <div><h3>Glossary of Terms</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Full A–Z glossary of trading and Forex terms — coming soon.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -666,5 +975,16 @@ It's worth being honest about something from the outset: day trading is not a sh
   <p style="margin-top:0.5rem;">Built with care — <a href="#faq">disclaimer</a> · <a href="#resources">resources</a> · <a href="#live">live sessions</a></p>
 </footer>
 
+<script>
+  function toggleCard(header) {
+    const card = header.closest('.card');
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    // Update hint text
+    const hint = header.querySelector('.card-hint');
+    if (hint) hint.textContent = isOpen ? 'Click to read' : 'Click to close';
+  }
+</script>
 </body>
 </html>
+
