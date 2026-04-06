@@ -213,13 +213,13 @@
 
     /* ── CARD BODY (hidden until open) ── */
     .card-body {
-      max-height: 0;
+      height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
+      transition: height 0.4s ease, padding 0.3s ease;
       padding: 0 1.75rem;
     }
     .card.open .card-body {
-      max-height: 900px;
+      /* height is set dynamically by JS to exact content height */
       padding: 0 1.75rem 1.5rem;
     }
     .card-body p { font-size: 0.88rem; color: rgba(26,26,46,0.65); line-height: 1.7; }
@@ -719,8 +719,48 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — personal experience with FTMO, MyFundedFX, The Funded Trader and others.</p>
+        <p>Choosing a prop firm is an important decision and one worth taking some time over. The industry has grown rapidly and while there are many legitimate, well-run firms, there are also some that are poorly managed or, in the worst cases, not entirely straightforward about their terms. A little research before committing goes a long way.</p>
+
+        <p><strong>How prop firms make their money</strong><br>It is not primarily from funding successful traders — it is from challenge fees. The reality is that the majority of people who attempt a challenge do not pass, and many of those who fail subscribe again and try a second or third time. Those repeated fees add up. For the firms, a high failure and re-subscription rate is a profitable business model. This is not necessarily sinister — the challenges are genuinely difficult and are designed to be — but it is worth being clear-eyed about it. The only money you are ever risking with a prop firm is your challenge fee. That fee may not seem large on its own, but if you attempt challenges multiple times or across different firms, those costs can quietly accumulate into a significant sum. Keep track of what you are spending.</p>
+
+        <p>When choosing a firm, look for transparent rules with no hidden clauses, a clear and fair payout process, independently verified reviews, and a firm that has been operating for at least a year or two. Newer firms carry more risk — a small number have shut down without honouring payouts.</p>
+
+        <p><strong>⚠️ The most important thing to understand: drawdown limits</strong><br>The size of a funded account can create a very misleading impression of how much capital you actually have to work with. This is critical, so please read it carefully.</p>
+
+        <p>On a <em>personal</em> account, if you have $50,000 and follow the standard rule of risking no more than 1% per trade, your stop loss on any given trade is $500. To lose your entire account you would need to hit that stop loss one hundred times in a row. You have an enormous amount of room to absorb losses while you find your feet.</p>
+
+        <p>A <em>prop firm</em> account works very differently. On a $50,000 challenge account, the total maximum drawdown permitted might be as little as $2,500 — and sometimes even less. That means your entire margin for error across <em>all</em> your trades combined is $2,500. If you are still risking 1% per trade ($500), that is only five losing trades before the account is gone. Hit your stop loss two or three times on a bad morning and you can find yourself perilously close to the limit.</p>
+
+        <p>The <strong>drawdown limit — not the account size — is the true measure of how much capital you have available.</strong> Always think in terms of your drawdown allowance, plan your position sizes accordingly, and treat every trade as if it matters far more than it would on a personal account. Because on a prop firm challenge, it does.</p>
+
+        <p><strong>Firms worth researching</strong><br>As always, do your own due diligence before committing to any of them:</p>
+
+        <ul style="list-style:none;padding:0;margin-top:0.5rem;display:flex;flex-direction:column;gap:0.4rem;">
+          <li>🔗 <a href="https://ftmo.com" target="_blank" style="color:var(--coral);font-weight:700;">FTMO</a> — One of the longest-established and most respected firms in the industry.</li>
+          <li>🔗 <a href="https://fundednext.com" target="_blank" style="color:var(--coral);font-weight:700;">Funded Next</a> — Competitive profit splits, quick payouts, flexible challenge models.</li>
+          <li>🔗 <a href="https://finotivefunding.com" target="_blank" style="color:var(--coral);font-weight:700;">Finotive Funding</a> — FSC-regulated, weekly payouts, instant funding options available.</li>
+          <li>🔗 <a href="https://citytradersimperium.com" target="_blank" style="color:var(--coral);font-weight:700;">City Traders Imperium</a> — UK-based, operating since 2018, weekly payouts, up to 100% profit share.</li>
+          <li>🔗 <a href="https://audacity.capital" target="_blank" style="color:var(--coral);font-weight:700;">Audacity Capital</a> — London-based, operating since 2012, one of the most established firms available.</li>
+          <li>🔗 <a href="https://e8funding.com" target="_blank" style="color:var(--coral);font-weight:700;">E8 Funding</a> — Clean dashboard, fast payouts, good analytics tools, no time limits.</li>
+          <li>🔗 <a href="https://fundingtraders.com" target="_blank" style="color:var(--coral);font-weight:700;">Funding Traders</a> — Simple evaluations, fair rules, strong trader support.</li>
+          <li>🔗 <a href="https://fixify.io" target="_blank" style="color:var(--coral);font-weight:700;">Fixify</a> — Worth researching and comparing against the more established names.</li>
+          <li>🔗 <a href="https://directfunded.com" target="_blank" style="color:var(--coral);font-weight:700;">Direct Funded</a> — Worth researching and comparing against the more established names.</li>
+          <li>🔗 Tradiac — <em style="color:rgba(26,26,46,0.45);">Note: Tradiac appears to have closed down as of 2024. Listed here for reference but verify current status before attempting to register.</em></li>
+        </ul>
         <span class="card-tag">Personal Picks</span>
+      </div>
+    </div>
+    <div class="card c-coral">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📋</span>
+          <div><h3>Copy Trading</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — an introduction to copy trading: what it is, how it works, its advantages and limitations, and how it relates to prop firm trading.</p>
+        <span class="card-tag">Coming Soon</span>
       </div>
     </div>
   </div>
@@ -744,7 +784,11 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon — what EAs are, why automation matters, and what it can and can't do.</p>
+        <p>An Expert Advisor — almost always referred to simply as an EA — is an automated trading program that runs inside MetaTrader 5. Once set up and switched on, it monitors the market on your behalf and can open, manage, and close trades automatically, based on a set of rules you define. You don't need to be sitting at your screen for it to work.</p>
+        <p>The rules an EA follows can be as simple or as complex as you like. A basic EA might say: "If the 50-period moving average crosses above the 200-period moving average, open a buy trade with a stop loss of 20 pips and a take profit of 40 pips." A more advanced one might factor in multiple indicators, time-of-day filters, news avoidance windows, and dynamic position sizing — all running simultaneously across several pairs.</p>
+        <p>EAs are valuable for several reasons. They <strong>remove emotion from the equation entirely</strong> — the EA doesn't panic, doesn't get greedy, and doesn't hesitate. They can monitor the market around the clock, including sessions you are asleep for. And they allow you to test a strategy rigorously on historical data before risking a single penny of real money.</p>
+        <p>However, EAs are not a magic solution. A poorly designed EA will lose money just as consistently as a good one makes it. The EA is only ever as good as the logic behind it. There is also a risk called <strong>over-optimisation</strong> — where an EA is tuned so perfectly to historical data that it performs brilliantly in backtests but falls apart in live market conditions. This is covered in more detail in the Important Caveats card.</p>
+        <p>Used thoughtfully, though, an EA can be a powerful addition to a trader's toolkit — and the good news is that you no longer need to be a programmer to build one.</p>
         <span class="card-tag">Advanced</span>
       </div>
     </div>
@@ -757,7 +801,11 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — what EABuilder is, how to get started, why it's accessible.</p>
+        <p>EABuilder is an online tool that allows you to create custom indicators and fully automated Expert Advisors for MetaTrader 5 — without writing a single line of code. You build your strategy using a visual, point-and-click interface, and EABuilder generates the underlying code for you automatically.</p>
+        <p>This matters because writing an EA from scratch in MQL5 — the programming language MetaTrader uses — is genuinely difficult. It requires coding knowledge that most traders simply don't have and aren't interested in acquiring. EABuilder bridges that gap, making automation accessible to anyone who understands their own trading strategy, regardless of their technical background.</p>
+        <p>Here is how the basic process works. You log into EABuilder through your browser, choose whether you want to build an indicator or a full Expert Advisor, and then work through a series of structured steps. You define your <strong>entry conditions</strong> — for example, "RSI crosses below 30" — your <strong>exit conditions</strong>, your stop loss and take profit rules, and any additional filters you want to apply. EABuilder assembles all of this into a working file that you can download and install directly into MT5 in a matter of minutes.</p>
+        <p>The tool is particularly well suited to traders who already have a clear strategy in mind and want to automate it, or to those who want to test whether a rules-based version of their approach would have performed well historically.</p>
+        <p>EABuilder's own website is genuinely one of the best places to get a feel for what the tool can do. Their front page includes video demonstrations and a clear overview of the full feature set — it is well worth spending fifteen minutes there before diving in. You'll find it at <a href="https://www.eabuilder.com" target="_blank" style="color:var(--coral);font-weight:700;">eabuilder.com</a>.</p>
         <span class="card-tag">Screen Recording</span>
       </div>
     </div>
@@ -978,12 +1026,32 @@
 <script>
   function toggleCard(header) {
     const card = header.closest('.card');
+    const body = card.querySelector('.card-body');
     const isOpen = card.classList.contains('open');
-    card.classList.toggle('open', !isOpen);
-    // Update hint text
     const hint = header.querySelector('.card-hint');
-    if (hint) hint.textContent = isOpen ? 'Click to read' : 'Click to close';
+
+    if (isOpen) {
+      // Collapse: set height explicitly then animate to 0
+      body.style.height = body.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        body.style.height = '0px';
+      });
+      card.classList.remove('open');
+      if (hint) hint.textContent = 'Click to read';
+    } else {
+      // Expand: measure natural height and animate to it
+      card.classList.add('open');
+      const fullHeight = body.scrollHeight + 24; // 24px = bottom padding
+      body.style.height = fullHeight + 'px';
+      if (hint) hint.textContent = 'Click to close';
+      // After transition, set to 'auto' so it reflows if window resizes
+      body.addEventListener('transitionend', function handler() {
+        body.style.height = 'auto';
+        body.removeEventListener('transitionend', handler);
+      });
+    }
   }
 </script>
 </body>
 </html>
+
