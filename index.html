@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -516,8 +516,8 @@
       </div>
       <div class="card-body">
         <p>These are the core terms you'll encounter constantly. Understanding them is essential before placing any trade.</p>
-        <p><strong>Pip</strong> — The smallest standard unit of price movement in Forex. For most pairs, one pip is a move of 0.0001. If GBP/USD moves from 1.2500 to 1.2501, that's one pip.</p>
-        <p><strong>Spread</strong> — The difference between the buy price and the sell price. This is effectively the broker's fee. Tighter spreads are better for traders.</p>
+        <p><strong>Pip</strong> — A pip (short for "percentage in point") is the standard unit of price movement in Forex. For most currency pairs, one pip is a move of 0.0001 — the fourth decimal place. If GBP/USD moves from 1.25000 to 1.25010, that is one pip. However, there is a smaller unit beneath the pip: the <strong>point</strong> (sometimes called a pipette), which is one tenth of a pip, represented by the fifth decimal place. There are ten points in one pip. This matters in practice because the spread — the difference between the buy and sell price — is typically quoted in points rather than full pips. A spread of "3 points" is 0.3 of a pip, not three full pips.</p>
+        <p><strong>Spread</strong> — The difference between the Bid (sell) price and the Ask (buy) price, quoted in points. This is effectively the broker's fee on every trade. Tighter spreads mean lower trading costs, which is one reason major pairs are preferred by beginners.</p>
         <p><strong>Lot</strong> — The size of your trade. A standard lot is 100,000 units of currency. Beginners typically use micro lots (1,000 units) to keep risk very small while learning.</p>
         <p><strong>Leverage</strong> — Borrowed capital that lets you control a larger position than your deposit. Leverage of 1:30 means £1,000 controls £30,000. It amplifies both profits and losses, so it must be used carefully.</p>
         <p><strong>Long vs Short</strong> — Going <em>long</em> means buying, expecting the price to rise. Going <em>short</em> means selling first, expecting the price to fall — and buying back later at a lower price to profit.</p>
@@ -546,8 +546,54 @@
     </div>
   </div>
 
-    <div class="placeholder" style="margin-top:1.5rem;">
-      📚 A full <strong>Forex Glossary</strong> will live here — bookmark it for reference whenever you hit an unfamiliar term. Coming soon.
+    <div class="card c-teal" style="margin-top:1.25rem;">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📖</span>
+          <div>
+            <h3>Forex Glossary — Key Terms Explained</h3>
+            <div class="card-hint">Click to open — bookmark this for reference</div>
+          </div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>These are the terms you are most likely to encounter as a beginner. Come back to this card whenever you hit an unfamiliar word.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.75rem 2rem;margin-top:1rem;">
+          <div><p><strong>Ask Price</strong> — The price at which your broker will sell a currency pair to you. The price you pay when entering a Buy (Long) trade.</p></div>
+          <div><p><strong>Bid Price</strong> — The price at which your broker will buy a currency pair from you. The price you receive when entering a Sell (Short) trade.</p></div>
+          <div><p><strong>Spread</strong> — The difference between the Bid and Ask price, measured in points. This is the broker's fee on each trade. A tighter spread means a lower cost to trade.</p></div>
+          <div><p><strong>Pip</strong> — The standard unit of price movement, equal to 0.0001 for most pairs (the fourth decimal place). A move from 1.25000 to 1.25010 is one pip.</p></div>
+          <div><p><strong>Point (Pipette)</strong> — One tenth of a pip, equal to 0.00001 (the fifth decimal place). Spreads are typically quoted in points. Ten points make one pip.</p></div>
+          <div><p><strong>Lot</strong> — The unit used to measure trade size. A standard lot is 100,000 units of the base currency. A mini lot is 10,000 and a micro lot is 1,000. Beginners should start with micro lots.</p></div>
+          <div><p><strong>Leverage</strong> — Borrowed capital from your broker that lets you control a position larger than your deposit. 1:30 leverage means £1,000 controls £30,000. Magnifies both profits and losses.</p></div>
+          <div><p><strong>Margin</strong> — The amount of your own money required to open and hold a leveraged trade. Think of it as a deposit held by your broker while the trade is open.</p></div>
+          <div><p><strong>Long</strong> — To go Long means to buy a currency pair, expecting its value to rise. You profit if the price goes up.</p></div>
+          <div><p><strong>Short</strong> — To go Short means to sell a currency pair first, expecting its value to fall, then buy back at a lower price to profit.</p></div>
+          <div><p><strong>Base Currency</strong> — The first currency in a pair. In GBP/USD, the Pound (GBP) is the base currency. When you buy the pair, you are buying the base currency.</p></div>
+          <div><p><strong>Quote Currency</strong> — The second currency in a pair. In GBP/USD, the Dollar (USD) is the quote currency. The price tells you how many units of the quote currency one unit of the base is worth.</p></div>
+          <div><p><strong>Bull Market</strong> — A market trending upwards. A trader expecting prices to rise is said to be "bullish."</p></div>
+          <div><p><strong>Bear Market</strong> — A market trending downwards. A trader expecting prices to fall is said to be "bearish."</p></div>
+          <div><p><strong>Stop Loss</strong> — An instruction to automatically close a trade if the price moves against you by a set amount. An essential risk management tool that limits how much you can lose on any single trade.</p></div>
+          <div><p><strong>Take Profit</strong> — An instruction to automatically close a trade when the price reaches a target profit level. Locks in your gain without requiring you to watch the screen.</p></div>
+          <div><p><strong>Market Order</strong> — An instruction to buy or sell immediately at the current market price.</p></div>
+          <div><p><strong>Pending Order</strong> — An instruction to open a trade only when the price reaches a level you specify in advance. Useful for entering at a precise price without watching the screen.</p></div>
+          <div><p><strong>Support Level</strong> — A price level where a pair has historically had difficulty falling below. Traders often look to buy near support, expecting a bounce upwards.</p></div>
+          <div><p><strong>Resistance Level</strong> — A price level where a pair has historically had difficulty rising above. Traders often look to sell near resistance, expecting a reversal downwards.</p></div>
+          <div><p><strong>Candlestick</strong> — A chart bar showing the open, high, low, and close price for a given time period. The most widely used chart type in Forex. Covered in detail in the MT5 section.</p></div>
+          <div><p><strong>Timeframe</strong> — The period each candlestick represents. Common timeframes: 1 minute (M1), 5 minutes (M5), 1 hour (H1), 4 hours (H4), daily (D1). Shorter timeframes show more detail; longer ones show broader trends.</p></div>
+          <div><p><strong>Trend</strong> — The general direction a currency pair is moving over time. "The trend is your friend" — trading in the direction of the prevailing trend is generally safer than against it.</p></div>
+          <div><p><strong>Volatility</strong> — How much and how quickly a price moves. High volatility means larger swings and greater potential profit — but also greater risk.</p></div>
+          <div><p><strong>Liquidity</strong> — How easily a pair can be bought or sold without significantly affecting its price. Major pairs are highly liquid; exotic pairs are not.</p></div>
+          <div><p><strong>Slippage</strong> — The difference between the price you expected when placing an order and the price at which it was actually executed. More common during high-volatility news events.</p></div>
+          <div><p><strong>Swap / Rollover</strong> — A fee (or occasionally a credit) applied when a trade is held open overnight. Reflects the interest rate difference between the two currencies in the pair.</p></div>
+          <div><p><strong>Risk/Reward Ratio</strong> — A comparison of potential profit to potential loss on a trade. A 1:2 ratio means risking one unit to potentially gain two. Consistently trading with a favourable ratio is a cornerstone of profitable trading.</p></div>
+          <div><p><strong>Drawdown</strong> — The reduction in your account balance from its peak to its lowest point over a period. A key personal performance measure and a critical rule in all prop firm accounts.</p></div>
+          <div><p><strong>Equity</strong> — The current real-time value of your account including any open trades. If your balance is $10,000 and an open trade shows a $200 profit, your equity is $10,200.</p></div>
+          <div><p><strong>Balance</strong> — The total in your account based only on closed trades. Does not reflect the value of any currently open positions — that is what equity is for.</p></div>
+        </div>
+        <span class="card-tag" style="margin-top:1.5rem;">Reference</span>
+      </div>
     </div>
 </section>
 
@@ -577,51 +623,52 @@
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-header-left">
           <span class="card-icon">🗺️</span>
-          <div><h3>Tour of the Interface</h3><div class="card-hint">Click to read</div></div>
+          <div><h3>Tour of the Interface — 1</h3><div class="card-hint">Click to watch</div></div>
         </div>
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — charts, market watch, navigator panel walkthrough.</p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-bottom:0.75rem;">
+          <iframe
+            src="https://www.youtube.com/embed/05n_7rWoxcQ"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
         <span class="card-tag">Screen Recording</span>
       </div>
     </div>
     <div class="card c-green">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-header-left">
-          <span class="card-icon">🖱️</span>
-          <div><h3>Placing Your First Trade</h3><div class="card-hint">Click to read</div></div>
+          <span class="card-icon">🗺️</span>
+          <div><h3>Tour of the Interface — 2</h3><div class="card-hint">Click to watch</div></div>
         </div>
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — market orders, stop loss, take profit explained.</p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-bottom:0.75rem;">
+          <iframe
+            src="https://www.youtube.com/embed/WtUwxmdw4Cc"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
         <span class="card-tag">Screen Recording</span>
       </div>
     </div>
     <div class="card c-green">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-header-left">
-          <span class="card-icon">🕯️</span>
-          <div><h3>Reading &amp; Customising Charts</h3><div class="card-hint">Click to read</div></div>
+          <span class="card-icon">🗺️</span>
+          <div><h3>Tour of the Interface — 3</h3><div class="card-hint">Click to watch</div></div>
         </div>
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — timeframes, candle types, colours and layout.</p>
-        <span class="card-tag">Screen Recording</span>
-      </div>
-    </div>
-    <div class="card c-green">
-      <div class="card-header" onclick="toggleCard(this)">
-        <div class="card-header-left">
-          <span class="card-icon">📊</span>
-          <div><h3>Using Built-in Indicators</h3><div class="card-hint">Click to read</div></div>
-        </div>
-        <span class="card-chevron">▼</span>
-      </div>
-      <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon — moving averages, RSI, MACD and more.</p>
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Screen recording coming soon.</p>
         <span class="card-tag">Screen Recording</span>
       </div>
     </div>
