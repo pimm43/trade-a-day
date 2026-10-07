@@ -849,7 +849,57 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <p>Please create a MetaTrader 5 indicator called <strong>KeltnerChannel_ColouredCandles</strong> with the following specification:</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Purpose</p>
+        <p>Display a standard Keltner Channel on the price chart and colour each candle according to where its close is relative to the channel bands — giving an immediate visual read of whether price is breaking out or contained.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Keltner Channel settings</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Middle line: EMA of close, period 20 (configurable)</li>
+          <li>Band width: ATR × multiplier, ATR period 20 (configurable), multiplier 1.0 (configurable)</li>
+          <li>Upper band = EMA + (ATR × multiplier)</li>
+          <li>Lower band = EMA − (ATR × multiplier)</li>
+          <li>Draw all three lines on the chart (middle, upper, lower)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Candle colouring logic</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Close <strong>above</strong> the upper band → candle coloured <strong>Lime Green</strong></li>
+          <li>Close <strong>below</strong> the lower band → candle coloured <strong>Red</strong></li>
+          <li>Close <strong>inside</strong> the bands (between upper and lower inclusive) → candle coloured <strong>Gray</strong></li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Candle rendering</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Draw full OHLC candles (body and wicks) using the coloured candle technique — four <code>DRAW_COLOR_CANDLES</code> buffers (open, high, low, close) plus a colour index buffer</li>
+          <li>The coloured candles replace the default chart candles, so instruct the user to set the main chart candle colour to none (or match the background) after applying the indicator</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">All inputs configurable</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>EMA_Period (default 20)</li>
+          <li>ATR_Period (default 20)</li>
+          <li>ATR_Multiplier (default 1.0)</li>
+          <li>UpperBandColor (default clrDodgerBlue)</li>
+          <li>MiddleLineColor (default clrGold)</li>
+          <li>LowerBandColor (default clrDodgerBlue)</li>
+          <li>BandLineWidth (default 1)</li>
+          <li>ColorAbove (default clrLimeGreen) — candle close above upper band</li>
+          <li>ColorBelow (default clrRed) — candle close below lower band</li>
+          <li>ColorInside (default clrGray) — candle close inside bands</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.5rem 1.25rem;line-height:1.7;">
+          <li>MQL5 / MetaTrader 5 only</li>
+          <li><code>#property indicator_chart_window</code> — draws on the main price chart</li>
+          <li>Use <code>DRAW_COLOR_CANDLES</code> for the coloured candle buffers</li>
+          <li>Use <code>iEMA</code> and <code>iATR</code> via indicator handles and <code>CopyBuffer</code></li>
+          <li>Non-repainting — calculate on confirmed closed bars only</li>
+          <li>No comma operators in ternary expressions (MQL5 compiler restriction)</li>
+        </ul>
+
         <span class="card-tag">Indicator</span>
       </div>
     </div>
