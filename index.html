@@ -981,6 +981,68 @@
         <span class="card-tag">Indicator</span>
       </div>
     </div>
+    <div class="card c-teal">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📏</span>
+          <div><h3>Swing Levels</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Please create a MetaTrader 5 indicator called <strong>SH_SL_Lines</strong> with the following specification:</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Purpose</p>
+        <p>Automatically draw horizontal lines on the price chart at the most recent confirmed swing high and swing low levels. Each line extends a fixed number of bars to the right from its swing point. A clickable ON/OFF button in the top-left corner of the chart lets the user instantly show or hide all the lines.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Swing point detection</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>A swing high is a bar whose high is greater than the highs of all surrounding bars within the lookback window</li>
+          <li>A swing low is a bar whose low is less than the lows of all surrounding bars within the lookback window</li>
+          <li>LookbackBars (default 8, configurable) — the number of bars on each side used to confirm a swing point</li>
+          <li>Only fully confirmed bars are used (not the current live bar)</li>
+          <li>Find the single most recent confirmed swing high and the single most recent confirmed swing low</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Line drawing</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Draw a horizontal line at the swing high level using <code>OBJ_TREND</code>, starting at the swing high bar and extending exactly LineExtendBars (default 4, configurable) bars to the right</li>
+          <li>Draw a horizontal line at the swing low level in the same way</li>
+          <li>Lines are redrawn on each new bar to always reflect the most recent swing points</li>
+          <li>Use fixed named objects (e.g. "SHL_High" and "SHL_Low") so they are cleanly deleted and redrawn without accumulating</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">ON/OFF toggle button</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Place a small button object in the top-left corner of the chart (e.g. corner CORNER_LEFT_UPPER, xdistance 10, ydistance 10)</li>
+          <li>Button label: "ON" when lines are visible, "OFF" when hidden</li>
+          <li>Button background: teal/green when ON, dark grey when OFF</li>
+          <li>Clicking the button immediately toggles the lines — show or delete them right away without waiting for the next tick, using <code>CopyHigh</code> and <code>CopyLow</code> to read the current bar data</li>
+          <li>Handle the click in <code>OnChartEvent</code> using the <code>CHARTEVENT_OBJECT_CLICK</code> event</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">All inputs configurable</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>LookbackBars (default 8)</li>
+          <li>LineExtendBars (default 4) — how many bars to the right each line extends</li>
+          <li>SwingHighColor (default clrCrimson)</li>
+          <li>SwingLowColor (default clrDodgerBlue)</li>
+          <li>LineWidth (default 2)</li>
+          <li>LineStyle (default STYLE_SOLID)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.5rem 1.25rem;line-height:1.7;">
+          <li>MQL5 / MetaTrader 5 only</li>
+          <li><code>#property indicator_chart_window</code> — draws on the main price chart</li>
+          <li>Use <code>CopyHigh</code> and <code>CopyLow</code> (not the series arrays) to read bar data reliably</li>
+          <li>Delete all objects in <code>OnDeinit</code> to clean up when the indicator is removed</li>
+          <li>No comma operators in ternary expressions (MQL5 compiler restriction)</li>
+        </ul>
+
+        <span class="card-tag">Indicator</span>
+      </div>
+    </div>
   </div>
 
   <!-- Expert Advisors sub-section -->
