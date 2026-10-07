@@ -1043,6 +1043,87 @@
         <span class="card-tag">Indicator</span>
       </div>
     </div>
+    <div class="card c-teal">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">🎯</span>
+          <div><h3>Keltner Signal Arrows</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Please create a MetaTrader 5 indicator called <strong>KC_SignalArrows</strong> with the following specification:</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Purpose</p>
+        <p>A standalone arrow and sound alert indicator based on Keltner Channel breakouts. It is designed to run alongside a separate Keltner Channel candle-colouring indicator without interfering with it — this indicator draws only arrows and fires sound alerts, nothing else. Signals follow a strict first-entry-only sequence: Buy, Sell, Buy, Sell.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Keltner Channel calculation</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Middle line: EMA of close, period 20 (configurable)</li>
+          <li>Upper band = EMA + (ATR × multiplier), ATR period 20 (configurable), multiplier 1.0 (configurable)</li>
+          <li>Lower band = EMA − (ATR × multiplier)</li>
+          <li>Calculate internally — do not rely on any external indicator being present</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Signal logic — strict alternation</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>BUY</strong> — the first bar to close above the upper Keltner band, provided the previous signal was a Sell (or no signal has fired yet)</li>
+          <li><strong>SELL</strong> — the first bar to close below the lower Keltner band, provided the previous signal was a Buy (or no signal has fired yet)</li>
+          <li>Once a Buy fires, no further Buys are allowed until a Sell fires, and vice versa — strictly Buy, Sell, Buy, Sell</li>
+          <li>Use a <code>lastSignal</code> variable (1 = last was buy, −1 = last was sell, 0 = none yet) and replay the full bar history on load so the alternation state is always correct</li>
+          <li>Non-repainting — signals are only confirmed on fully closed bars</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Arrow display</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Draw arrows on the <strong>main price chart</strong> using <code>DRAW_ARROW</code> buffers</li>
+          <li>Buy arrow: placed below the candle low, offset by ArrowDistance points downward. Arrow code 225 (default)</li>
+          <li>Sell arrow: placed above the candle high, offset by ArrowDistance points upward. Arrow code 226 (default)</li>
+          <li>Arrow offset from candle: ArrowDistance (default 4 points, configurable)</li>
+          <li>Arrow size: 4 (configurable)</li>
+          <li>Buy arrow colour: LimeGreen (configurable)</li>
+          <li>Sell arrow colour: Crimson (configurable)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Sound alert</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>When <code>SoundAlert = true</code>, <code>PlaySound()</code> fires once on the closing of each signal bar</li>
+          <li>No repeated alerts on the same bar from tick updates — track the last alerted bar time</li>
+          <li>Buy and Sell can use different sound files</li>
+          <li>BuySoundFile (default "alert.wav"), SellSoundFile (default "alert2.wav")</li>
+          <li>Optional <code>PopupAlert</code> input for an MT5 popup in addition to the sound</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">All inputs configurable</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>EMA_Period (default 20)</li>
+          <li>ATR_Period (default 20)</li>
+          <li>ATR_Multiplier (default 1.0)</li>
+          <li>BuyArrowCode (default 225)</li>
+          <li>SellArrowCode (default 226)</li>
+          <li>ArrowDistance (default 4 — in points)</li>
+          <li>ArrowSize (default 4)</li>
+          <li>BuyArrowColor (default clrLimeGreen)</li>
+          <li>SellArrowColor (default clrCrimson)</li>
+          <li>SoundAlert (default true)</li>
+          <li>BuySoundFile (default "alert.wav")</li>
+          <li>SellSoundFile (default "alert2.wav")</li>
+          <li>PopupAlert (default false)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.5rem 1.25rem;line-height:1.7;">
+          <li>MQL5 / MetaTrader 5 only</li>
+          <li><code>#property indicator_chart_window</code> — arrows on the main price chart only, no subwindow</li>
+          <li>Two <code>DRAW_ARROW</code> plot buffers: one for Buy arrows, one for Sell arrows. Empty value <code>EMPTY_VALUE</code> where no signal</li>
+          <li>Use <code>iEMA</code> and <code>iATR</code> via handles and <code>CopyBuffer</code> for the KC calculation</li>
+          <li>Use <code>CopyClose</code>, <code>CopyHigh</code>, <code>CopyLow</code> (not series arrays) for reliable bar data</li>
+          <li>No comma operators in ternary expressions (MQL5 compiler restriction)</li>
+        </ul>
+
+        <span class="card-tag">Indicator</span>
+      </div>
+    </div>
   </div>
 
   <!-- Expert Advisors sub-section -->
