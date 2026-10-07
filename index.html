@@ -1311,7 +1311,55 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <p>Please create a MetaTrader 5 Expert Advisor called <strong>EMA_Detach_Panel</strong> that combines the EMA Detach signal logic with a draggable on-chart trading panel. The EA supports two modes — Manual and Auto — toggled by a button on the panel.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Modes</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>Manual mode:</strong> BUY and SELL buttons are active; the signal label on the panel shows the current EMA Detach signal for guidance but no trade is opened automatically</li>
+          <li><strong>Auto mode:</strong> a trade fires automatically whenever a new EMA Detach signal appears on the close of a confirmed bar; any existing EA position is closed before the new one is opened; BUY and SELL buttons are dimmed</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Signal logic (mirrors EMA Detach Signals v1.01)</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>BUY signal:</strong> last closed bar fully above shifted EMA (close &gt; EMA and low &gt; EMA), previous bar was not fully above, and the last signal was a Sell</li>
+          <li><strong>SELL signal:</strong> last closed bar fully below shifted EMA (close &lt; EMA and high &lt; EMA), previous bar was not fully below, and the last signal was a Buy</li>
+          <li>Strict Buy → Sell alternation enforced; history is replayed on the first tick to establish the correct signal state before any live trades fire</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Panel controls</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>Mode toggle:</strong> switches between Manual and Auto; button turns green in Auto mode</li>
+          <li><strong>Signal label:</strong> displays ▲ BUY, ▼ SELL, or — depending on the most recent confirmed EMA Detach signal</li>
+          <li><strong>BUY / SELL:</strong> manual entry buttons (dimmed in Auto mode)</li>
+          <li><strong>Break Even:</strong> moves the stop loss to the open price once profit ≥ BreakEvenPoints</li>
+          <li><strong>Close All:</strong> closes all EA positions on this symbol immediately</li>
+          <li><strong>Status line:</strong> shows direction, lot size, open price, and live P&amp;L in points and pips; green when in profit, red when in loss</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Trade management</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Initial stop loss: ATR × ATR_SL_Multiplier (default 2.0), placed below/above the entry price</li>
+          <li>Trailing stop: ATR × ATR_Trail_Multiplier (default 2.0), updated on every tick; stop only ever moves in the trade's favour</li>
+          <li>All positions identified by Magic Number (default 800002)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Include <code>&lt;Trade\Trade.mqh&gt;</code> and use <code>CTrade</code> for all order operations</li>
+          <li>EMA via <code>iMA</code> handle with EMA_Shift; ATR via <code>iATR</code> handle; values read with <code>CopyBuffer</code></li>
+          <li>Panel built from <code>OBJ_RECTANGLE_LABEL</code>, <code>OBJ_BUTTON</code>, and <code>OBJ_LABEL</code> objects; all non-selectable and hidden from the object list</li>
+          <li>Draggable by clicking and holding the title bar; <code>CHART_MOUSE_SCROLL</code> is frozen during the drag and restored on release</li>
+          <li>Object prefix <code>EDP_</code> to avoid conflicts with other indicators</li>
+          <li>No comma operators in ternary expressions; no variable-length arrays</li>
+        </ul>
+
+        <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
+        <p>
+          <a href="https://pimm43.github.io/trade-a-day/EMA_Detach_Panel.zip"
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            ⬇ EMA_Detach_Panel.zip
+          </a>
+        </p>
         <span class="card-tag">Expert Advisor</span>
       </div>
     </div>
