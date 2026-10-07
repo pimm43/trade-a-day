@@ -862,7 +862,24 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <h4 style="margin-bottom:0.5rem;">Prompt for MT5</h4>
+        <p style="background:rgba(0,0,0,0.06);border-left:3px solid var(--teal);padding:0.75rem 1rem;border-radius:6px;margin-bottom:1rem;font-style:italic;">Using the Williams Percent Range (WPR) please create an arrow indicator with sound alert which triggers a Buy arrow on the first candle to cross and close above WPR period 14 level −80, and a Sell arrow on the first candle to cross and close below the −20 level.</p>
+        <h4 style="margin-bottom:0.5rem;">About this indicator</h4>
+        <p style="margin-bottom:0.75rem;">Here's the indicator. Full breakdown:</p>
+        <p style="font-weight:700;margin-bottom:0.25rem;">Signal logic</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>BUY (↑ LimeGreen)</strong> — WPR was at or below −80 (oversold), closes back above it → recovery signal. Arrow sits just below the WPR line in the subwindow.</li>
+          <li><strong>SELL (↓ Crimson)</strong> — WPR was at or above −20 (overbought), closes back below it → reversal signal. Arrow sits just above the WPR line.</li>
+        </ul>
+        <p style="margin-bottom:0.75rem;">This is the mean-reversion interpretation: buy when recovering out of oversold, sell when falling out of overbought.</p>
+        <p style="font-weight:700;margin-bottom:0.25rem;">The WPR subwindow</p>
+        <p style="margin-bottom:0.75rem;">The WPR line is displayed (DodgerBlue) with dotted reference lines at −20, −50 and −80. Arrows appear directly on the WPR line at the crossover bar.</p>
+        <p style="font-weight:700;margin-bottom:0.25rem;">Price chart arrows (optional)</p>
+        <p style="margin-bottom:0.75rem;">When <code>ShowOnChart = true</code>, matching arrows appear below the candle low (buy) or above the candle high (sell) on the main chart, with independently adjustable size and colour.</p>
+        <p style="font-weight:700;margin-bottom:0.25rem;">Sound alert</p>
+        <p style="margin-bottom:0.75rem;">When <code>SoundAlert = true</code>, <code>PlaySound()</code> fires on the closing of each signal bar — once only, no repeated alerts on the same bar from tick updates. The sound file must exist in your MT5 <code>Sounds</code> folder; <code>alert.wav</code> and <code>alert2.wav</code> are included with every MT5 installation. Buy and sell can use different sounds.</p>
+        <p style="font-weight:700;margin-bottom:0.25rem;">Optional popup</p>
+        <p><code>PopupAlert = true</code> adds an MT5 popup/notification in addition to the sound.</p>
         <span class="card-tag">Indicator</span>
       </div>
     </div>
