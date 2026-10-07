@@ -929,6 +929,58 @@
         <span class="card-tag">Indicator</span>
       </div>
     </div>
+    <div class="card c-teal">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <span class="card-icon">📐</span>
+          <div><h3>Auto Trend Lines</h3><div class="card-hint">Click to read</div></div>
+        </div>
+        <span class="card-chevron">▼</span>
+      </div>
+      <div class="card-body">
+        <p>Please create a MetaTrader 5 indicator called <strong>SwingTrendLines</strong> with the following specification:</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Purpose</p>
+        <p>Automatically draw two live trendlines on the price chart — one connecting the two most recent confirmed swing highs, and one connecting the two most recent confirmed swing lows. Both lines extend to the right as rays, updating automatically as new bars form.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Swing point detection</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>A swing high is a bar whose high is higher than the highs of the surrounding bars within the lookback window</li>
+          <li>A swing low is a bar whose low is lower than the lows of the surrounding bars within the lookback window</li>
+          <li>LookbackBars (default 8, configurable) — the number of bars either side used to confirm a swing point</li>
+          <li>Only confirmed bars count (i.e. not the current live bar)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Trendline drawing</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Upper trendline — drawn through the two most recent confirmed swing highs using <code>OBJ_TREND</code> with <code>RAY_RIGHT = true</code> so it extends forward across the chart</li>
+          <li>Lower trendline — drawn through the two most recent confirmed swing lows, also as a right-extending ray</li>
+          <li>Both lines are redrawn on every new bar so they always reflect the latest two swing points</li>
+          <li>If fewer than two swing highs or swing lows exist in the visible history, that line is simply not drawn</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">All inputs configurable</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>LookbackBars (default 8)</li>
+          <li>UpperLineColor (default clrCrimson)</li>
+          <li>LowerLineColor (default clrDodgerBlue)</li>
+          <li>LineWidth (default 2)</li>
+          <li>LineStyle (default STYLE_SOLID)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.5rem 1.25rem;line-height:1.7;">
+          <li>MQL5 / MetaTrader 5 only</li>
+          <li><code>#property indicator_chart_window</code> — draws on the main price chart</li>
+          <li>Use named chart objects (e.g. "STL_Upper" and "STL_Lower") so the lines are cleanly deleted and redrawn each bar without accumulating orphaned objects</li>
+          <li>Delete both objects in <code>OnDeinit</code> to clean up when the indicator is removed</li>
+          <li>Use <code>CopyHigh</code> and <code>CopyLow</code> to read bar data (not the <code>high[]</code> / <code>low[]</code> series arrays) for reliable results</li>
+          <li>No comma operators in ternary expressions (MQL5 compiler restriction)</li>
+        </ul>
+
+        <span class="card-tag">Indicator</span>
+      </div>
+    </div>
   </div>
 
   <!-- Expert Advisors sub-section -->
