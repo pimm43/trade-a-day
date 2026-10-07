@@ -1249,7 +1249,56 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <p><strong>What it does:</strong> A Manual/Auto Expert Advisor panel for MT5 that generates trade signals using Williams Percent Range (WPR). It enforces strict Buy→Sell alternation — once a Buy fires, no further Buys until a Sell fires, and vice versa. A draggable on-chart panel lets you switch between <em>Auto</em> mode (trades execute automatically) and <em>Manual</em> mode (Buy/Sell buttons activate on signal). Includes ATR-based stop loss, trailing stop, break-even automation, and a live status line showing open trade P&amp;L.</p>
+
+        <details style="margin:0.75rem 0;">
+          <summary style="cursor:pointer;font-weight:600;color:#1a1a2e;">💡 Ideal AI Prompt — how this EA was built</summary>
+          <pre style="white-space:pre-wrap;font-size:0.78rem;background:rgba(0,0,0,0.04);border-radius:6px;padding:0.9rem;margin-top:0.6rem;line-height:1.55;">Create an MQL5 Expert Advisor called WPR_Trading_Panel for MetaTrader 5.
+
+SIGNAL LOGIC — mirror WPR_Momentum_Strict.mq5 exactly:
+• Use iWPR(_Symbol, _Period, WPR_Period) with WPR_Period input defaulting to 14.
+• BUY signal:  previous WPR bar ≤ BuyLevel (-20) AND current WPR bar > BuyLevel (cross UP through -20).
+• SELL signal: previous WPR bar ≥ SellLevel (-80) AND current WPR bar &lt; SellLevel (cross DOWN through -80).
+• Strict alternation: once a Buy fires, ignore further Buys until a Sell fires, and vice versa.
+• Track state with int g_lastSig (0=none, 1=buy, -1=sell) and datetime g_lastSigBar.
+• On OnInit: replay ALL confirmed closed bars to set g_lastSig correctly before live trading starts (InitLastSig function).
+• On each tick: read 3 chronological bars (ArraySetAsSeries=false, [0]=2 bars ago, [1]=last closed, [2]=live). Signal detected on [1] vs [0]. Guard with barTime != g_lastSigBar.
+
+INDICATOR HANDLES:
+• Create g_wprHandle = iWPR(_Symbol, _Period, WPR_Period) and g_atrHandle = iATR(_Symbol, _Period, ATR_Period) in OnInit. Release both in OnDeinit.
+
+TRADE EXECUTION — use CTrade from &lt;Trade\Trade.mqh&gt;:
+• On signal, close all open positions then open new in signal direction.
+• Initial stop loss = ATR × SL_ATR_Mult (default 1.5), normalised to symbol digits.
+• Trailing stop: on every tick, if profit side moves favourably, trail SL to (current price ± ATR × Trail_ATR_Mult). SL only ever moves in the trade's favour.
+• Break even: if profit ≥ BreakEvenPoints, move SL to open price.
+
+PANEL — draggable on-chart control panel using chart objects:
+• Object prefix: WTP_
+• Background rectangle label (WTP_BG): PANEL_W=212, PANEL_H=257.
+• Title bar (WTP_TitleBar): height 26px, dark colour.
+• Title label (WTP_Title): "⚡ WPR Panel".
+• Mode button (WTP_Mode): toggles AUTO (green C'20,95,55') / MANUAL (purple-grey C'65,65,105').
+• Signal label (WTP_Signal): shows current signal state ("● BUY signal" in green, "● SELL signal" in red, "— Waiting" in grey).
+• Buy button (WTP_Buy) and Sell button (WTP_Sell): enabled only in MANUAL mode when the matching signal is active.
+• Break Even button (WTP_BE): manually triggers break-even move.
+• Close All button (WTP_CloseAll): closes all positions with magic number match.
+• Status label (WTP_Status): shows live trade info, e.g. "▲ Buy 1.0 @ 1.08450 | +12.3 pts"; green if profitable, red if not.
+• All objects: SELECTABLE=false, HIDDEN=true so they don't interfere with chart interaction.
+• Drag: detect mouse in title-bar region on CHARTEVENT_MOUSE_MOVE (bit 0 of sparam = left button held). Freeze CHART_MOUSE_SCROLL during drag, restore on release.
+
+INPUTS (all configurable):
+WPR_Period=14, BuyLevel=-20.0, SellLevel=-80.0, ATR_Period=14, SL_ATR_Mult=1.5, Trail_ATR_Mult=1.0, BreakEvenPoints=20, LotSize=0.1, MagicNumber=800003, PanelX=20, PanelY=50.
+
+Magic number: 800003. Copyright: "Trade-a-Day".</pre>
+        </details>
+
+        <p style="margin-top:0.6rem;">
+          <a href="https://pimm43.github.io/trade-a-day/WPR_Trading_Panel.zip"
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            ⬇ WPR_Trading_Panel.zip
+          </a>
+        </p>
         <span class="card-tag">Expert Advisor</span>
       </div>
     </div>
