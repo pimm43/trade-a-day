@@ -849,7 +849,7 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p>Please create a Keltner Channel with colored candles. Default period EMA 20, default ATR 20, default ATR multiplier 1. All candles that close above the upper band to be colored Green and all candles to close below the lower line to be colored red. Candles closing inside the bands to be colored gray. Properties and colors to be modifiable by the user.</p>
+        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
         <span class="card-tag">Indicator</span>
       </div>
     </div>
@@ -893,7 +893,73 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <p>Please create a MetaTrader 5 Expert Advisor called <strong>MarketEntryPanel</strong> with the following specification:</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Purpose</p>
+        <p>A semi-automated trade management panel. The user clicks BUY or SELL to enter a trade manually. The EA then manages the stop loss, trailing stop and break-even automatically. There is no automated signal entry — it is purely a manual entry tool.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Panel appearance</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Draggable panel (mouse drag on the title bar moves it around the chart)</li>
+          <li>Background colour: Dim Gray (clrDimGray / RGB 105, 105, 105)</li>
+          <li>Title bar label: "Market Entry Panel"</li>
+          <li>All panel objects use a unique prefix (e.g. MEP_) to avoid conflicts with other indicators or EAs</li>
+          <li>The panel should remain on top and be rebuilt on every chart refresh</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Buttons — stacked vertically in this order</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>BUY</strong> — green background, white text. Enters a market buy order when clicked.</li>
+          <li><strong>SELL</strong> — red background, white text. Enters a market sell order when clicked.</li>
+          <li><strong>Break Even</strong> — moves the stop loss to the entry price on the open trade when clicked. Only active when a trade is open.</li>
+          <li><strong>Close All</strong> — closes all open positions on the current symbol when clicked.</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Status display</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Shown below the buttons as a text label</li>
+          <li>When no position is open: display "No open position"</li>
+          <li>When a position is open: display the direction (Buy/Sell), lot size, entry price, and current profit or loss in both points and pips, e.g. "▲ Buy 1.0 @ 1.08450 | +12.3 pts / +1.2 pips"</li>
+          <li>Font size: 13pt bold</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Trade logic</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Only one trade open at a time on this symbol. If a trade is already open, the BUY and SELL buttons should not open another.</li>
+          <li>Use a unique MagicNumber (e.g. 800001) to identify trades belonging to this EA</li>
+          <li>Lot size: configurable input (default 1.0)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Stop loss and trailing stop — ATR-based</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>ATR period: 20 (configurable input)</li>
+          <li>ATR multiplier for initial stop loss: 2.0 (configurable input)</li>
+          <li>ATR multiplier for trailing stop: 2.0 (configurable input)</li>
+          <li>On entry, place a stop loss at Entry ± (ATR × SL multiplier)</li>
+          <li>On each tick, trail the stop loss using the ATR trailing stop method: the stop only moves in the direction of the trade, never against it</li>
+          <li>Break-even offset: 7 points — when profit reaches 7 points, the Break Even button moves the SL to entry</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Inputs summary</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>LotSize (default 1.0)</li>
+          <li>ATR_Period (default 20)</li>
+          <li>ATR_SL_Mult (default 2.0)</li>
+          <li>ATR_Trail_Mult (default 2.0)</li>
+          <li>BreakEvenPoints (default 7)</li>
+          <li>MagicNumber (default 800001)</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.5rem 1.25rem;line-height:1.7;">
+          <li>MQL5 / MetaTrader 5 only</li>
+          <li>Use <code>OnChartEvent</code> for button clicks and panel dragging</li>
+          <li>Use <code>CHART_MOUSE_SCROLL</code> freeze during drag, restore on mouse release</li>
+          <li>Use <code>CTrade</code> for order execution</li>
+          <li>Rebuild the panel in <code>OnInit</code> and redraw the status label on every <code>OnTick</code></li>
+          <li>No comma operators in ternary expressions (MQL5 compiler restriction)</li>
+        </ul>
+
         <span class="card-tag">Expert Advisor</span>
       </div>
     </div>
