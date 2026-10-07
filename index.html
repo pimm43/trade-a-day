@@ -941,7 +941,44 @@
         <span class="card-chevron">▼</span>
       </div>
       <div class="card-body">
-        <p style="font-style:italic;color:rgba(26,26,46,0.45);">Content coming soon.</p>
+        <p>Please modify the <strong>EMA_Detach_Signals</strong> MetaTrader 5 indicator so that arrows fire only on the <em>first</em> candle to be completely detached from the EMA, and signals follow a strict alternating sequence: Buy → Sell → Buy → Sell.</p>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Signal conditions</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li><strong>BUY arrow:</strong> the candle closes above the shifted EMA <em>and</em> the candle low is above the shifted EMA (no part touches the EMA), the previous bar was <em>not</em> fully above, and the last signal was a Sell</li>
+          <li><strong>SELL arrow:</strong> the candle closes below the shifted EMA <em>and</em> the candle high is below the shifted EMA (no part touches the EMA), the previous bar was <em>not</em> fully below, and the last signal was a Buy</li>
+          <li>Strict alternation is enforced — two buys or two sells in a row are never produced</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">EMA settings</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Default 8-period EMA, shift 1 bar to the right, applied to Close</li>
+          <li>Period, shift, applied price and line colour are all configurable inputs</li>
+          <li>The EMA line is drawn on the chart for reference</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Arrow appearance</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Buy arrow (LimeGreen, code 233) placed below the candle low; Sell arrow (Crimson, code 234) placed above the candle high</li>
+          <li>Arrow size, codes, colours, and distance from candle are all configurable</li>
+          <li>Optional alert fires when a new signal appears on the live bar</li>
+        </ul>
+
+        <p style="font-weight:700;margin:0.75rem 0 0.25rem;">Technical requirements</p>
+        <ul style="margin:0 0 0.75rem 1.25rem;line-height:1.7;">
+          <li>Two-pass calculation: a history-replay pass establishes the correct <code>lastSig</code> state, then a live pass processes recent bars and fires alerts</li>
+          <li>EMA obtained via <code>iMA</code> handle with the shift parameter; values copied with <code>CopyBuffer</code> into a chronological array</li>
+          <li>Price arrays (<code>close</code>, <code>high</code>, <code>low</code>) set to chronological order with <code>ArraySetAsSeries(…, false)</code></li>
+          <li>All indicator buffers initialised with <code>EMPTY_VALUE</code> on a full recalculation</li>
+        </ul>
+
+        <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
+        <p>
+          <a href="https://pimm43.github.io/trade-a-day/EMA_Detach_Signals.zip"
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+            ⬇ EMA_Detach_Signals.zip
+          </a>
+        </p>
         <span class="card-tag">Indicator</span>
       </div>
     </div>
