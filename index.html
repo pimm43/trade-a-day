@@ -7,16 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --sun:    #FFD93D;
-      --sky:    #6BCB77;
-      --coral:  #FF6B6B;
-      --teal:   #4ECDC4;
-      --ink:    #1A1A2E;
-      --soft:   #F9F7F0;
-      --mid:    #E8E4DA;
+      --sun:    #3B82F6;   /* accent blue  */
+      --sky:    #2563EB;   /* mid blue     */
+      --coral:  #1D4ED8;   /* deep blue    */
+      --teal:   #64748B;   /* slate        */
+      --ink:    #0F172A;   /* near-black   */
+      --soft:   #F1F5F9;   /* cool off-white */
+      --mid:    #CBD5E1;   /* light slate  */
       --white:  #FFFFFF;
-      --radius: 18px;
-      --shadow: 0 4px 24px rgba(26,26,46,0.08);
+      --radius: 0px;
+      --shadow: 0 4px 24px rgba(15,23,42,0.10);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@
     /* ── NAV ── */
     nav {
       background: var(--white);
-      border-bottom: 3px solid var(--sun);
+      border-bottom: 3px solid var(--sky);
       padding: 0 2rem;
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -42,10 +42,15 @@
     }
 
     .nav-logo {
-      font-size: 1.4rem; font-weight: 900;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 1.55rem; font-weight: 900;
+      display: flex; align-items: center; gap: 0.65rem;
+      letter-spacing: -0.02em;
     }
-    .nav-logo span.dot { color: var(--coral); }
+    .nav-logo .logo-mark {
+      display: flex; align-items: center; flex-shrink: 0;
+    }
+    .nav-logo .logo-text { color: var(--ink); }
+    .nav-logo .logo-accent { color: var(--sky); }
 
     .nav-links {
       display: flex; gap: 0.25rem; list-style: none;
@@ -67,14 +72,14 @@
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(255,107,107,0.4); }
-      50%      { box-shadow: 0 0 0 8px rgba(255,107,107,0); }
+      0%,100% { box-shadow: 0 0 0 0 rgba(29,78,216,0.5); }
+      50%      { box-shadow: 0 0 0 8px rgba(29,78,216,0); }
     }
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, var(--sun) 0%, #FFE77A 50%, var(--teal) 100%);
-      padding: 5rem 2rem 4rem;
+      background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 60%, #1D4ED8 100%);
+      padding: 2.5rem 2rem 2rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -82,36 +87,37 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255,107,107,0.15) 0%, transparent 50%);
+      background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%);
     }
     .hero-badge {
       display: inline-block;
-      background: var(--white);
-      color: var(--coral);
-      font-size: 0.75rem; font-weight: 900;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.35rem 1rem;
-      border-radius: 50px;
-      margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.12);
+      color: #93C5FD;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 0;
+      border: 1px solid rgba(147,197,253,0.3);
+      margin-bottom: 1rem;
     }
     .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
       font-weight: 900;
-      line-height: 1.15;
-      color: var(--ink);
+      line-height: 1.2;
+      color: #F8FAFC;
       position: relative;
-      max-width: 700px; margin: 0 auto 1.25rem;
+      max-width: 680px; margin: 0 auto 0.9rem;
     }
     .hero h1 em {
       font-family: 'Inter', sans-serif;
       font-style: italic;
-      color: var(--coral);
+      color: #60A5FA;
     }
     .hero p {
-      font-size: 1.1rem; max-width: 520px; margin: 0 auto 2.5rem;
-      color: rgba(26,26,46,0.75);
-      line-height: 1.7;
+      font-size: 0.95rem; max-width: 480px; margin: 0 auto 1.75rem;
+      color: rgba(248,250,252,0.65);
+      line-height: 1.65;
       position: relative;
     }
     .hero-cta {
@@ -342,7 +348,28 @@
 
 <!-- ══ NAVIGATION ══ -->
 <nav>
-  <div class="nav-logo">Trade-a-Day<span class="dot">.</span></div>
+  <div class="nav-logo">
+    <!-- Candlestick logo mark -->
+    <span class="logo-mark">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- background square -->
+        <rect width="36" height="36" fill="#1D4ED8"/>
+        <!-- wicks -->
+        <line x1="8"  y1="6"  x2="8"  y2="30" stroke="#93C5FD" stroke-width="1.5"/>
+        <line x1="18" y1="4"  x2="18" y2="32" stroke="#93C5FD" stroke-width="1.5"/>
+        <line x1="28" y1="8"  x2="28" y2="28" stroke="#93C5FD" stroke-width="1.5"/>
+        <!-- bearish candle (left, red/grey) -->
+        <rect x="5"  y="10" width="6" height="12" fill="#94A3B8"/>
+        <!-- bullish candle (centre, bright blue) -->
+        <rect x="15" y="14" width="6" height="14" fill="#60A5FA"/>
+        <!-- bearish candle (right, mid) -->
+        <rect x="25" y="12" width="6" height="10" fill="#94A3B8"/>
+        <!-- upward arrow overlay -->
+        <polyline points="6,24 14,16 22,20 30,10" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.55"/>
+      </svg>
+    </span>
+    <span class="logo-text">Trade<span class="logo-accent">-a-</span>Day</span>
+  </div>
   <ul class="nav-links">
     <li><a href="#intro">Day Trading</a></li>
     <li><a href="#forex">Forex</a></li>
@@ -600,7 +627,7 @@
       </div>
       <div class="card-body">
         <p>Click the link below to watch this screen recording on YouTube:</p>
-        <a href="https://youtu.be/sYhshUl56EM" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">▶ Watch on YouTube</a>
+        <a href="https://youtu.be/sYhshUl56EM" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">▶ Watch on YouTube</a>
         <span class="card-tag" style="display:block;margin-top:1rem;">Screen Recording</span>
       </div>
     </div>
@@ -614,7 +641,7 @@
       </div>
       <div class="card-body">
         <p>Click the link below to watch this screen recording on YouTube:</p>
-        <a href="https://www.youtube.com/watch?v=05n_7rWoxcQ" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">▶ Watch on YouTube</a>
+        <a href="https://www.youtube.com/watch?v=05n_7rWoxcQ" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">▶ Watch on YouTube</a>
         <span class="card-tag" style="display:block;margin-top:1rem;">Screen Recording</span>
       </div>
     </div>
@@ -628,7 +655,7 @@
       </div>
       <div class="card-body">
         <p>Click the link below to watch this screen recording on YouTube:</p>
-        <a href="https://www.youtube.com/watch?v=WtUwxmdw4Cc" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">▶ Watch on YouTube</a>
+        <a href="https://www.youtube.com/watch?v=WtUwxmdw4Cc" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">▶ Watch on YouTube</a>
         <span class="card-tag" style="display:block;margin-top:1rem;">Screen Recording</span>
       </div>
     </div>
@@ -655,7 +682,7 @@
       </div>
       <div class="card-body">
         <p>Click the link below to watch this screen recording on YouTube:</p>
-        <a href="https://youtu.be/tflHSSBKK-E" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">▶ Watch on YouTube</a>
+        <a href="https://youtu.be/tflHSSBKK-E" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">▶ Watch on YouTube</a>
         <span class="card-tag" style="display:block;margin-top:1rem;">Screen Recording</span>
       </div>
     </div>
@@ -669,7 +696,7 @@
       </div>
       <div class="card-body">
         <p>Click the link below to watch this screen recording on YouTube:</p>
-        <a href="https://youtu.be/uRZ6i1LNsSk" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">▶ Watch on YouTube</a>
+        <a href="https://youtu.be/uRZ6i1LNsSk" target="_blank" style="display:inline-block;margin-top:0.75rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">▶ Watch on YouTube</a>
         <span class="card-tag" style="display:block;margin-top:1rem;">Screen Recording</span>
       </div>
     </div>
@@ -905,7 +932,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/KeltnerChannel_ColouredCandles.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ KeltnerChannel_ColouredCandles.zip
           </a>
         </p>
@@ -925,7 +952,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/WPR_Momentum_Strict.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ WPR_Momentum_Strict.zip
           </a>
         </p>
@@ -985,7 +1012,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/SwingTrendLines.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ SwingTrendLines.zip
           </a>
         </p>
@@ -1054,7 +1081,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/SH_SL_Lines.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ SH_SL_Lines.zip
           </a>
         </p>
@@ -1142,7 +1169,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/KC_SignalArrows.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ KC_SignalArrows.zip
           </a>
         </p>
@@ -1233,7 +1260,7 @@
         <p style="font-weight:700;margin:1.25rem 0 0.25rem;">Download source file</p>
         <p>
           <a href="https://pimm43.github.io/trade-a-day/MarketEntryPanel.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ MarketEntryPanel.zip
           </a>
         </p>
@@ -1253,7 +1280,7 @@
 
         <details style="margin:0.75rem 0;">
           <summary style="cursor:pointer;font-weight:600;color:#1a1a2e;">💡 Ideal AI Prompt — how this EA was built</summary>
-          <pre style="white-space:pre-wrap;font-size:0.78rem;background:rgba(0,0,0,0.04);border-radius:6px;padding:0.9rem;margin-top:0.6rem;line-height:1.55;">Create an MQL5 Expert Advisor called WPR_Trading_Panel for MetaTrader 5.
+          <pre style="white-space:pre-wrap;font-size:0.78rem;background:rgba(0,0,0,0.04);border-radius:0;padding:0.9rem;margin-top:0.6rem;line-height:1.55;">Create an MQL5 Expert Advisor called WPR_Trading_Panel for MetaTrader 5.
 
 SIGNAL LOGIC — mirror WPR_Momentum_Strict.mq5 exactly:
 • Use iWPR(_Symbol, _Period, WPR_Period) with WPR_Period input defaulting to 14.
@@ -1295,7 +1322,7 @@ Magic number: 800003. Copyright: "Trade-a-Day".</pre>
 
         <p style="margin-top:0.6rem;">
           <a href="https://pimm43.github.io/trade-a-day/WPR_Trading_Panel.zip"
-             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+             style="display:inline-block;padding:0.45rem 1rem;background:#2563eb;color:#fff;border-radius:0;text-decoration:none;font-weight:600;font-size:0.9rem;">
             ⬇ WPR_Trading_Panel.zip
           </a>
         </p>
@@ -1332,17 +1359,17 @@ Magic number: 800003. Copyright: "Trade-a-Day".</pre>
         <h3>📼 Past Sessions</h3>
         <p>Missed a live session? Watch it back on YouTube at your own pace — use the speed controls on the YouTube player to replay at 0.5x, 1x, 1.5x or 2x speed.</p>
         <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;">
-          <a href="https://youtube.com/live/9mqT1zrS4ko?feature=share" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.1);color:white;font-weight:700;padding:0.4rem 1rem;border-radius:50px;font-size:0.82rem;">▶ 3/6/26</a>
+          <a href="https://youtube.com/live/9mqT1zrS4ko?feature=share" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.1);color:white;font-weight:700;padding:0.4rem 1rem;border-radius:3px;font-size:0.82rem;">▶ 3/6/26</a>
         </div>
       </div>
         <p>A detailed record of my trades including stats, performance charts and analysis. Updated regularly.</p>
-        <a href="https://pimm43.github.io/trade-a-day/report_20260529.html" target="_blank" style="display:inline-block;margin-top:1rem;background:var(--coral);color:white;font-weight:800;padding:0.5rem 1.2rem;border-radius:50px;font-size:0.85rem;">📊 Open Journal</a>
+        <a href="https://pimm43.github.io/trade-a-day/report_20260529.html" target="_blank" style="display:inline-block;margin-top:1rem;background:var(--coral);color:white;font-weight:800;padding:0.5rem 1.2rem;border-radius:3px;font-size:0.85rem;">📊 Open Journal</a>
       </div>
     </div>
 
     <div class="placeholder-box">
       <p>📹 When a live session is running, click the button below to watch and follow along in real time. Sessions are announced in advance — check back here or watch for notifications.</p>
-      <a href="https://youtube.com/live/MR8jcqh2Ldk?feature=share" target="_blank" style="display:inline-block;margin-top:1rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.9rem;">🔴 Watch Live on YouTube</a>
+      <a href="https://youtube.com/live/MR8jcqh2Ldk?feature=share" target="_blank" style="display:inline-block;margin-top:1rem;background:var(--coral);color:white;font-weight:800;padding:0.6rem 1.4rem;border-radius:3px;font-size:0.9rem;">🔴 Watch Live on YouTube</a>
     </div>
   </div>
 </div>
